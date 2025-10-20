@@ -1,0 +1,2204 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "-- Find the number of posts written by each author\nSELECT authorId, COUNT(*)\nFROM Post\nGROUP BY authorId;\n-- Find the average number of posts written by all authors\nSELECT AVG(authorCount)\nFROM (\n    SELECT authorId, COUNT(*) AS authorCount\n    FROM Post\n    GROUP BY authorId\n) AS a;\n-- Find the average number of posts written on or after the year 2000\nSELECT AVG(authorCount)\nFROM (\n    SELECT authorId, COUNT(*) AS authorCount\n    FROM Post\n    WHERE date >= '2000-01-01'\n    GROUP BY authorId\n) AS a;\n-- Use a subquery to find the total amount of sponsorship for authors whose last name start with J\nSELECT SUM(amount)\nFROM (\n    SELECT amount\n    FROM Sponsorship INNER JOIN Author\n        ON authorSponsored = Author.id\n    WHERE lastName LIKE 'J%'\n) AS a;\n\nSELECT SUM(amount)\nFROM Sponsorship\nWHERE authorSponsored IN (\n    SELECT id\n    FROM Author\n    WHERE lastName LIKE 'J%'\n);\n-- Use a subquery to find posts that were written by a sponsored author\nSELECT *\nFROM Post\nWHERE authorId IN (\n    SELECT DISTINCT authorSponsored\n    FROM Sponsorship\n);\n-- Find the youngest half of authors\nSELECT *\nFROM Author\nWHERE birthdate < (\n    SELECT AVG(birthdate)\n    FROM Author\n);\n-- Find the youngest quarter of authors\nSELECT *\nFROM Author\nWHERE birthdate < (\n    SELECT AVG(birthdate)\n    FROM Author\n    WHERE birthdate < (\n        SELECT AVG(birthdate) AS half\n        FROM Author\n    )\n);\n-- Find the author(s) with the most posts\nSELECT a.id, COUNT(*)\nFROM Author AS a INNER JOIN Post\n    ON a.id = authorId\nGROUP BY a.id\nHAVING COUNT(*) >= ALL (\n    SELECT DISTINCT COUNT(*) as postCount\n    FROM Author AS a INNER JOIN Post\n        ON a.id = authorId\n    GROUP BY a.id\n);\n-- Find the authors with less than the average total amount of sponsorship money \nSELECT authorSponsored, SUM(amount)\nFROM Sponsorship\nGROUP BY authorSponsored\nHAVING SUM(amount) < (\n    SELECT AVG(sponsorAmount)\n    FROM (\n        SELECT SUM(amount) AS sponsorAmount\n        FROM sponsorship\n        GROUP BY authorSponsored\n        ) AS a\n    );\n-- Give me the names of the authors with less than the average total amount of sponsorship money \n-- left as an exercise for the reader",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 84,
+                    "column": 38
+                },
+                "position": {
+                    "lineNumber": 84,
+                    "column": 38
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 72,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 342
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 4,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "ed259878-2a85-418a-bc6f-6ebaa9f01849"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 105
+                        },
+                        "contentStart": 51,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "ed259878-2a85-418a-bc6f-6ebaa9f01849",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": 2
+                        },
+                        {
+                            "0": 2,
+                            "1": 2
+                        },
+                        {
+                            "0": 3,
+                            "1": 2
+                        },
+                        {
+                            "0": 4,
+                            "1": 2
+                        },
+                        {
+                            "0": 10,
+                            "1": 2
+                        },
+                        {
+                            "0": 11,
+                            "1": 2
+                        },
+                        {
+                            "0": 12,
+                            "1": 2
+                        },
+                        {
+                            "0": 13,
+                            "1": 2
+                        },
+                        {
+                            "0": 14,
+                            "1": 2
+                        },
+                        {
+                            "0": 15,
+                            "1": 2
+                        },
+                        {
+                            "0": 16,
+                            "1": 2
+                        },
+                        {
+                            "0": 17,
+                            "1": 2
+                        },
+                        {
+                            "0": 18,
+                            "1": 2
+                        },
+                        {
+                            "0": 19,
+                            "1": 2
+                        },
+                        {
+                            "0": 20,
+                            "1": 2
+                        },
+                        {
+                            "0": 21,
+                            "1": 2
+                        },
+                        {
+                            "0": 22,
+                            "1": 2
+                        },
+                        {
+                            "0": 104,
+                            "1": 1
+                        },
+                        {
+                            "0": 24,
+                            "1": 2
+                        },
+                        {
+                            "0": 25,
+                            "1": 2
+                        },
+                        {
+                            "0": 26,
+                            "1": 2
+                        },
+                        {
+                            "0": 27,
+                            "1": 2
+                        },
+                        {
+                            "0": 102,
+                            "1": 1
+                        },
+                        {
+                            "0": 29,
+                            "1": 2
+                        },
+                        {
+                            "0": 30,
+                            "1": 2
+                        },
+                        {
+                            "0": 31,
+                            "1": 2
+                        },
+                        {
+                            "0": 32,
+                            "1": 2
+                        },
+                        {
+                            "0": 33,
+                            "1": 2
+                        },
+                        {
+                            "0": 34,
+                            "1": 2
+                        },
+                        {
+                            "0": 35,
+                            "1": 2
+                        },
+                        {
+                            "0": 36,
+                            "1": 2
+                        },
+                        {
+                            "0": 37,
+                            "1": 2
+                        },
+                        {
+                            "0": 38,
+                            "1": 2
+                        },
+                        {
+                            "0": 101,
+                            "1": 1
+                        },
+                        {
+                            "0": 40,
+                            "1": 2
+                        },
+                        {
+                            "0": 41,
+                            "1": 2
+                        },
+                        {
+                            "0": 42,
+                            "1": 2
+                        },
+                        {
+                            "0": 43,
+                            "1": 2
+                        },
+                        {
+                            "0": 103,
+                            "1": 1
+                        },
+                        {
+                            "0": 45,
+                            "1": 2
+                        },
+                        {
+                            "0": 46,
+                            "1": 2
+                        },
+                        {
+                            "0": 47,
+                            "1": 2
+                        },
+                        {
+                            "0": 48,
+                            "1": 2
+                        },
+                        {
+                            "0": 49,
+                            "1": 2
+                        },
+                        {
+                            "0": 50,
+                            "1": 2
+                        },
+                        {
+                            "0": 5,
+                            "1": 1
+                        },
+                        {
+                            "0": 6,
+                            "1": 1
+                        },
+                        {
+                            "0": 7,
+                            "1": 1
+                        },
+                        {
+                            "0": 8,
+                            "1": 1
+                        },
+                        {
+                            "0": 9,
+                            "1": 1
+                        },
+                        {
+                            "0": null,
+                            "1": 3
+                        },
+                        {
+                            "0": 44,
+                            "1": 1
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "authorId",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "COUNT(*)",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 52 records retrieved in 0s"
+                    },
+                    "totalRowCount": 52,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the number of posts written by each author\nSELECT authorId, COUNT(*)\nFROM Post\nGROUP BY authorId",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 5,
+                "end": 11,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "789cc9a6-2e12-4a24-9570-199b8ee4d820"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 178
+                        },
+                        "contentStart": 59,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "789cc9a6-2e12-4a24-9570-199b8ee4d820",
+                    "rows": [
+                        {
+                            "0": "1.8269"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "AVG(authorCount)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.008ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the average number of posts written by all authors\nSELECT AVG(authorCount)\nFROM (\n    SELECT authorId, COUNT(*) AS authorCount\n    FROM Post\n    GROUP BY authorId\n) AS a",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 12,
+                "end": 19,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "95e9404a-6968-43cf-b792-53d6079804f0"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 220
+                        },
+                        "contentStart": 70,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "95e9404a-6968-43cf-b792-53d6079804f0",
+                    "rows": [
+                        {
+                            "0": "1.2000"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "AVG(authorCount)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.998ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the average number of posts written on or after the year 2000\nSELECT AVG(authorCount)\nFROM (\n    SELECT authorId, COUNT(*) AS authorCount\n    FROM Post\n    WHERE date >= '2000-01-01'\n    GROUP BY authorId\n) AS a",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 20,
+                "end": 35,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "7a4c7de0-eb0c-4b4a-be96-6298f899c916",
+                        "5e1d8f1a-bd35-4da5-95b3-c0ad313a165a"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 257
+                        },
+                        "contentStart": 99,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 257,
+                            "length": 126
+                        },
+                        "contentStart": 259,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "7a4c7de0-eb0c-4b4a-be96-6298f899c916",
+                    "rows": [
+                        {
+                            "0": "31630"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SUM(amount)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.899ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Use a subquery to find the total amount of sponsorship for authors whose last name start with J\nSELECT SUM(amount)\nFROM (\n    SELECT amount\n    FROM Sponsorship INNER JOIN Author\n        ON authorSponsored = Author.id\n    WHERE lastName LIKE 'J%'\n) AS a",
+                    "updatable": true,
+                    "fullTableName": ""
+                },
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "5e1d8f1a-bd35-4da5-95b3-c0ad313a165a",
+                    "rows": [
+                        {
+                            "0": "31630"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "SUM(amount)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.054ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 1,
+                    "sql": "\n\nSELECT SUM(amount)\nFROM Sponsorship\nWHERE authorSponsored IN (\n    SELECT id\n    FROM Author\n    WHERE lastName LIKE 'J%'\n)",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 36,
+                "end": 42,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f208ed0b-d98d-4bef-91f9-ca8fe1518882"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 170
+                        },
+                        "contentStart": 72,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "f208ed0b-d98d-4bef-91f9-ca8fe1518882",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": 1,
+                            "2": "Sed deserunt aut excepturi atque ad vel.",
+                            "3": "In velit molestias saepe possimus consectetur cupiditate. Magni voluptas dolor recusandae autem impedit voluptatem. Temporibus rerum at excepturi hic. Qui voluptas aut alias molestiae eos.",
+                            "4": "Velit quo fuga omnis. Et magnam eum et voluptatum maiores est. Facere nostrum nihil ab excepturi omnis dolorem laborum. Ad at ad veritatis aliquid molestias ipsam.",
+                            "5": "2013-08-29"
+                        },
+                        {
+                            "0": 2,
+                            "1": 2,
+                            "2": "Voluptatem voluptatem qui omnis rem reprehenderit distinctio molestiae.",
+                            "3": "Molestiae aut est optio explicabo beatae ipsa sunt ratione. A et harum ea natus id. Qui non quas ab omnis facere iusto voluptatem.",
+                            "4": "Quasi rerum earum sapiente odio asperiores. Blanditiis debitis inventore perferendis distinctio expedita ex. Consequuntur omnis est voluptatibus cumque aut maxime fugit.",
+                            "5": "1974-03-10"
+                        },
+                        {
+                            "0": 3,
+                            "1": 3,
+                            "2": "Rerum dolor molestias odio id a neque ipsa.",
+                            "3": "Ratione a recusandae et possimus corrupti dolorem. Dolor inventore laboriosam cupiditate nemo illum. Cumque quia consequatur optio quia sed voluptas quia.",
+                            "4": "Ipsa esse repellendus enim occaecati. Eos dolorem voluptates iure qui aliquam autem voluptatem. Voluptatibus quaerat aliquid magnam nisi nihil cupiditate molestiae quae.",
+                            "5": "2011-06-03"
+                        },
+                        {
+                            "0": 4,
+                            "1": 4,
+                            "2": "Sint aut quia ad animi voluptas iure.",
+                            "3": "Ut tempore laboriosam nihil dignissimos. Consequatur et sapiente reprehenderit consequatur. Blanditiis minus id qui dolorem et alias veritatis.",
+                            "4": "Inventore nam eum alias dolores. Vero omnis amet ut suscipit. In minus molestiae rerum facilis explicabo aut ut.",
+                            "5": "2000-01-01"
+                        },
+                        {
+                            "0": 10,
+                            "1": 10,
+                            "2": "Sit eaque blanditiis perferendis molestias.",
+                            "3": "Quaerat iste illum qui. Consequatur omnis ut quaerat neque. Necessitatibus dolores vitae voluptatem. Voluptatum laborum molestiae dolorum modi nihil repudiandae iste. Quaerat et alias odit vel autem aut ut.",
+                            "4": "Voluptas corporis a architecto maxime voluptate voluptatum. Adipisci veritatis quia accusamus ut. Molestias aut dicta est soluta sed quae veniam. Voluptatem doloribus dolores rem deserunt non ut.",
+                            "5": "1990-08-29"
+                        },
+                        {
+                            "0": 11,
+                            "1": 11,
+                            "2": "Debitis sunt magnam eum rerum.",
+                            "3": "Autem aut commodi laborum et debitis et numquam ab. Omnis commodi necessitatibus voluptatibus laboriosam rerum aut sint nisi. A placeat similique voluptate dignissimos optio eveniet magnam.",
+                            "4": "Vitae optio aut ut omnis quo quia expedita quibusdam. Quisquam accusantium quia voluptas possimus et. Necessitatibus dolorem iste quae saepe voluptatem natus. Eius et aperiam possimus ipsum.",
+                            "5": "1996-11-19"
+                        },
+                        {
+                            "0": 12,
+                            "1": 12,
+                            "2": "Voluptates et voluptates aut facere facilis earum voluptates.",
+                            "3": "Voluptatem accusamus tempore accusantium fugit rerum accusamus. Dolores delectus eius magni. Ipsa et cumque et natus iure architecto dolores sed.",
+                            "4": "In soluta recusandae occaecati temporibus. Qui velit nulla inventore. Dolores ullam deserunt sit excepturi assumenda.",
+                            "5": "1980-10-12"
+                        },
+                        {
+                            "0": 13,
+                            "1": 13,
+                            "2": "Fugit esse similique pariatur qui in quia omnis.",
+                            "3": "Sint pariatur suscipit enim perferendis reiciendis nobis et. Voluptate voluptate nobis voluptatem est. Numquam omnis est unde quibusdam.",
+                            "4": "Sit maxime quis est unde ad maxime. In culpa doloribus consequuntur.",
+                            "5": "1988-09-10"
+                        },
+                        {
+                            "0": 14,
+                            "1": 14,
+                            "2": "Vitae officia illo culpa fugit nulla alias.",
+                            "3": "Quas non praesentium commodi. Et ipsam id doloremque velit magni perspiciatis ea. Aspernatur rerum eum vitae. Officiis qui aut quia reiciendis et.",
+                            "4": "Aut dolore hic dolorem veritatis. Qui eos sed impedit sequi omnis nisi. Nostrum et cum adipisci laudantium recusandae laborum commodi.",
+                            "5": "2002-07-03"
+                        },
+                        {
+                            "0": 15,
+                            "1": 15,
+                            "2": "Ratione reprehenderit cumque sed libero soluta quisquam aliquid.",
+                            "3": "Et voluptatum dolorem sint sed ea hic blanditiis. Minima aut velit et soluta qui. Placeat ea eligendi tenetur illo.",
+                            "4": "Aut omnis et aperiam qui voluptas fugiat eveniet. Neque minima velit nemo fuga dolor quam dolore. Omnis aspernatur esse expedita enim est.",
+                            "5": "1982-04-01"
+                        },
+                        {
+                            "0": 16,
+                            "1": 16,
+                            "2": "Aperiam qui repudiandae natus nihil.",
+                            "3": "Animi culpa corrupti dolores repellendus. Fugit temporibus ut quia dolores numquam. Aspernatur quos deserunt itaque molestiae sit deleniti. Et consectetur sed rerum rerum voluptas fuga.",
+                            "4": "Temporibus totam inventore quas est sed quo. Dolorum sit iste et ullam. Voluptas iste nostrum omnis blanditiis. Deserunt deleniti quo nostrum harum qui voluptates esse.",
+                            "5": "1984-08-04"
+                        },
+                        {
+                            "0": 17,
+                            "1": 17,
+                            "2": "Reprehenderit facilis impedit quos sed illo vitae harum eos.",
+                            "3": "Nostrum qui rem iusto dolor. Rerum dicta eos consequuntur cumque rerum neque mollitia. Animi iusto itaque quibusdam earum. Praesentium deleniti exercitationem nihil.",
+                            "4": "Qui temporibus dolores odit sit voluptatem libero facilis rerum. Quis consequatur nobis vel labore. Sed blanditiis temporibus autem doloribus natus.",
+                            "5": "1998-11-04"
+                        },
+                        {
+                            "0": 18,
+                            "1": 18,
+                            "2": "Quidem libero in laborum repellendus non inventore sunt.",
+                            "3": "Est nobis aut sunt error quibusdam et et. Magni maiores dolorum ea doloribus consequatur quae praesentium. Totam sit est cum provident qui corporis.",
+                            "4": "Et iste cupiditate eligendi. Eos consequatur quis magnam doloremque quia. Vitae nobis culpa ea voluptatum labore autem. Nemo nemo consequatur voluptas est nam in iusto.",
+                            "5": "2013-10-20"
+                        },
+                        {
+                            "0": 19,
+                            "1": 19,
+                            "2": "Rerum molestias quos quos reprehenderit aut.",
+                            "3": "Cupiditate est autem quos quae necessitatibus vel qui. Eius eveniet enim non velit possimus enim nam. Consequatur rerum perferendis sint est quo non exercitationem similique. Fugit est veritatis molestiae saepe laboriosam modi.",
+                            "4": "Id debitis porro nisi quod cum adipisci. Quia placeat rerum quia asperiores quaerat non. Sint libero est quis aut.",
+                            "5": "2014-05-06"
+                        },
+                        {
+                            "0": 20,
+                            "1": 20,
+                            "2": "Dolore dicta eaque architecto consectetur a quia voluptatem iusto.",
+                            "3": "Voluptatem soluta sapiente nemo. Qui tenetur aut consequatur cum qui. Necessitatibus ipsam reiciendis dolor molestias debitis sit sunt eaque.",
+                            "4": "Reiciendis in quam nobis incidunt. Rerum ab perferendis aut velit ipsa eum pariatur. Et hic ex enim.",
+                            "5": "1996-07-14"
+                        },
+                        {
+                            "0": 21,
+                            "1": 21,
+                            "2": "Et est aspernatur vitae inventore.",
+                            "3": "Voluptatem repellendus voluptatem expedita harum sed fugit explicabo nostrum. Maiores nesciunt odio hic suscipit. Dolor saepe quisquam voluptates quis iste voluptatem.",
+                            "4": "Eos numquam laboriosam omnis incidunt. Animi debitis sint qui ut architecto natus quo. Sit iusto et consectetur voluptatum tenetur. Facilis quia quia explicabo quos.",
+                            "5": "2001-11-26"
+                        },
+                        {
+                            "0": 22,
+                            "1": 22,
+                            "2": "Facere fugit excepturi et aperiam inventore quidem.",
+                            "3": "Qui et tempora esse voluptates. Aut nostrum consequuntur nam vel. Consectetur nobis aliquam qui ut.",
+                            "4": "A et voluptas alias ratione et corrupti mollitia. Minus eos ipsam fugit earum cum quis. Inventore quis non numquam nihil.",
+                            "5": "1979-11-23"
+                        },
+                        {
+                            "0": 24,
+                            "1": 24,
+                            "2": "Ex quidem et in quia ab omnis neque.",
+                            "3": "Aut recusandae sit mollitia error voluptatem et et ipsam. Doloribus est deserunt et facere. Est inventore amet deleniti cumque. Eveniet dolores consequatur labore sed. Est aut quasi suscipit maxime harum molestiae.",
+                            "4": "Vel sed et repellendus omnis ipsam id minima dolores. Nesciunt autem corrupti accusamus perspiciatis blanditiis tempora eligendi. Eos est et aut dolorum deserunt omnis ut.",
+                            "5": "1984-09-04"
+                        },
+                        {
+                            "0": 25,
+                            "1": 25,
+                            "2": "Libero et et ut deleniti qui deserunt.",
+                            "3": "Quos ut porro et est quibusdam sunt consequatur. Voluptatibus ea non ipsum eius.",
+                            "4": "Quod vero et rem ipsa. Magnam magni et rerum voluptatibus consequatur minus quidem. Autem quibusdam quo aliquid necessitatibus. Nihil ducimus adipisci beatae vel.",
+                            "5": "2015-02-08"
+                        },
+                        {
+                            "0": 26,
+                            "1": 26,
+                            "2": "Saepe officia ipsam perspiciatis delectus consequatur qui aut.",
+                            "3": "Non delectus natus repudiandae dolores autem et laboriosam. Est maiores est iure ut perferendis. Quasi praesentium nisi sed nesciunt doloribus veritatis.",
+                            "4": "Vitae ex ut eum in quibusdam amet. Non ipsam ratione voluptatibus velit vel. Accusantium ullam minima tenetur magnam deserunt doloribus.",
+                            "5": "2009-07-17"
+                        },
+                        {
+                            "0": 27,
+                            "1": 27,
+                            "2": "A itaque accusantium ut et est accusantium iure.",
+                            "3": "A omnis dolorum incidunt labore cupiditate quod. Numquam id iure et unde. Et dignissimos sit est deserunt iste aut velit deserunt.",
+                            "4": "Minima amet ad minima nam et. Nisi aut cum ea saepe ipsum aliquam officia. Repudiandae iste in distinctio facilis fuga in. Qui laboriosam voluptas ex omnis. Nostrum et esse placeat consequatur.",
+                            "5": "2010-04-10"
+                        },
+                        {
+                            "0": 29,
+                            "1": 29,
+                            "2": "Pariatur autem qui suscipit nobis.",
+                            "3": "Illum unde et quasi ut enim. Dolore saepe illo molestiae deserunt consequatur illo odio. Omnis saepe ut minima laboriosam porro. Nobis harum explicabo provident voluptatem sequi possimus dolores.",
+                            "4": "Id alias molestiae qui fuga non id omnis. Itaque dolorem esse sunt nesciunt repellendus sint explicabo. Iure quam dolorum ad iure ullam maiores mollitia est.",
+                            "5": "2002-07-26"
+                        },
+                        {
+                            "0": 30,
+                            "1": 30,
+                            "2": "Ut non incidunt nemo qui ullam cupiditate dolor.",
+                            "3": "Esse dolorum aliquam pariatur debitis non eveniet. Totam illum ut non numquam doloribus. Occaecati a qui ut soluta.",
+                            "4": "Quo voluptates cum voluptates dolores dicta veritatis. Facere reiciendis quas repellat in consequatur architecto alias sit. Aut qui tempora libero quae dignissimos.",
+                            "5": "2008-05-26"
+                        },
+                        {
+                            "0": 51,
+                            "1": 1,
+                            "2": "Sint aut est est quibusdam tempore delectus vero.",
+                            "3": "Aliquam quia nihil architecto pariatur sunt omnis nostrum. At et unde ad aut similique. Incidunt veritatis fugiat culpa non.",
+                            "4": "Aliquid est minima vel impedit fugit fugiat. Quis non magnam eius quibusdam. Non eum eius est similique. Sapiente dicta dolorum sed aut et ut eos ratione.",
+                            "5": "1972-06-22"
+                        },
+                        {
+                            "0": 52,
+                            "1": 2,
+                            "2": "Quos et aliquam voluptas et tempora consequatur dolores et.",
+                            "3": "Ea esse omnis amet iste. Repudiandae eos earum ut quod a. Molestiae facilis aut voluptas neque et.",
+                            "4": "Blanditiis ut omnis impedit possimus voluptatum dolores hic. Ipsam laboriosam accusamus vitae. Tempora laboriosam hic deserunt. Est aut qui laboriosam deserunt numquam.",
+                            "5": "1982-07-19"
+                        },
+                        {
+                            "0": 53,
+                            "1": 3,
+                            "2": "Neque debitis et sint.",
+                            "3": "Quasi dolore officia odit reiciendis deleniti ullam dignissimos. Iste eligendi odit dolorem velit consectetur officia. Quia voluptatem non est tempore maiores ut.",
+                            "4": "Deleniti libero exercitationem molestias consequatur nisi sit temporibus. Accusamus sequi nam nobis esse temporibus qui ea. Quis qui qui qui qui.",
+                            "5": "1983-07-02"
+                        },
+                        {
+                            "0": 54,
+                            "1": 4,
+                            "2": "Asperiores saepe adipisci ut eos.",
+                            "3": "Dolore amet totam ratione architecto eius doloribus. Voluptatem suscipit in facilis est. Vel atque est officiis eveniet aspernatur rerum quibusdam. Qui quo molestiae ut voluptas dolorem.",
+                            "4": "Maxime qui nulla nemo voluptas ut et cumque voluptatem. Perspiciatis quia magni non incidunt voluptas rerum. Natus doloremque eos qui et nihil pariatur possimus.",
+                            "5": "1976-10-19"
+                        },
+                        {
+                            "0": 55,
+                            "1": 5,
+                            "2": "Accusamus nemo voluptatem omnis quos molestiae rerum alias.",
+                            "3": "Maiores aperiam expedita error aspernatur rerum. Voluptatem et voluptatem velit voluptas fugit. Maiores omnis est enim quos ab autem.",
+                            "4": "Veritatis minus aut fugit et commodi aut. Perferendis consectetur repellendus et consectetur earum similique at. Inventore dolores sint explicabo repudiandae neque et explicabo.",
+                            "5": "2016-12-11"
+                        },
+                        {
+                            "0": 56,
+                            "1": 6,
+                            "2": "Molestiae reiciendis sit quaerat eos nulla aut.",
+                            "3": "Autem beatae molestias labore eos. Enim nostrum ea ducimus.",
+                            "4": "Ea sequi quae est earum. Odit aliquam soluta quo cumque quibusdam. Aut atque architecto sit ea culpa.",
+                            "5": "1987-08-13"
+                        },
+                        {
+                            "0": 57,
+                            "1": 7,
+                            "2": "Sit non qui sint ut qui incidunt.",
+                            "3": "Ea quisquam et vero explicabo itaque. Cum id hic aut libero iusto ea soluta. Facere hic est numquam dicta reiciendis. Repudiandae iure ut nisi nam dolores aut.",
+                            "4": "Architecto molestiae rerum animi non qui harum inventore. Assumenda molestias harum nam alias et dolorum. Sed itaque qui neque voluptate. Sit sed dolorem sed dolorem maiores.",
+                            "5": "2003-10-11"
+                        },
+                        {
+                            "0": 58,
+                            "1": 8,
+                            "2": "Id hic qui voluptatem esse architecto quis mollitia.",
+                            "3": "Magni velit dolores aliquam voluptatem quae rerum iure. Molestiae sit animi quia nihil porro ipsum error. Beatae aperiam repellat est aut.",
+                            "4": "Impedit suscipit impedit aut. Doloremque voluptatem est iure aut. Est saepe unde excepturi optio ex. Voluptas voluptatem id sequi sint voluptatem eos.",
+                            "5": "1980-05-17"
+                        },
+                        {
+                            "0": 59,
+                            "1": 9,
+                            "2": "Veritatis omnis eum dignissimos ullam.",
+                            "3": "Quae enim maiores ratione nesciunt. At molestias eaque minima qui est provident. Est aut voluptatem et.",
+                            "4": "Ea est doloremque debitis veritatis. Nostrum veritatis omnis natus consectetur perspiciatis est vel. Cupiditate nihil ut quisquam asperiores hic.",
+                            "5": "1985-08-25"
+                        },
+                        {
+                            "0": 60,
+                            "1": 10,
+                            "2": "Possimus nisi consequatur sint perspiciatis est.",
+                            "3": "Aliquam est illo impedit aspernatur explicabo laudantium. Voluptas temporibus nemo magnam ut non et. Neque odit aut in et sequi. Quis in id incidunt corrupti non ratione iure quo. Autem est maxime quam repellat et.",
+                            "4": "Repudiandae quod quo porro fugiat debitis. Ut sit quasi tempore inventore eveniet assumenda excepturi sint. Consectetur sapiente sit ullam rerum amet. Deleniti cum qui in et.",
+                            "5": "1980-03-07"
+                        },
+                        {
+                            "0": 61,
+                            "1": 11,
+                            "2": "Quo quas aliquam magni cumque sint quam molestias.",
+                            "3": "Est doloribus ut et possimus voluptas blanditiis. Occaecati molestiae accusamus deleniti eos quo.",
+                            "4": "Voluptatem at cum cum facilis ea. Architecto at quo aut rerum vitae quia quae. Non sapiente id occaecati consequatur similique quibusdam consequatur.",
+                            "5": "1980-10-16"
+                        },
+                        {
+                            "0": 62,
+                            "1": 12,
+                            "2": "Ducimus cumque expedita amet excepturi aut magnam.",
+                            "3": "Labore voluptatum et esse similique enim. Ipsum fugit hic maiores praesentium perferendis itaque officiis minus. Nam sequi dignissimos sed recusandae et. Nesciunt voluptates qui quaerat quae ducimus similique.",
+                            "4": "Tempora modi et et quam officia saepe ullam. Autem dolorum aut enim ad et dolor consequatur. Minima sapiente et ducimus laboriosam earum nostrum.",
+                            "5": "1993-02-27"
+                        },
+                        {
+                            "0": 63,
+                            "1": 13,
+                            "2": "Doloribus quia non eum eum laudantium.",
+                            "3": "Aut et non quis optio nihil ut ut. Sequi rem quas expedita molestiae. Magnam est aut itaque nihil sit reiciendis.",
+                            "4": "Qui reprehenderit doloribus culpa. Illo hic voluptatem quos et impedit dolores. Sint illo sint doloribus iure.",
+                            "5": "2020-12-17"
+                        },
+                        {
+                            "0": 64,
+                            "1": 14,
+                            "2": "Nisi quia dolores sed voluptas quisquam est.",
+                            "3": "Sed consectetur illo qui amet nulla ut fugiat nesciunt. Qui officiis non eligendi enim fugit consequatur. Recusandae cupiditate eaque illum consequatur consequatur.",
+                            "4": "Consequatur velit dignissimos odio. Dolorem aliquam nulla aut dolor perferendis ex suscipit eligendi. Omnis tenetur voluptatem aut rem ut. Impedit qui porro cumque voluptatibus non.",
+                            "5": "1994-12-06"
+                        },
+                        {
+                            "0": 65,
+                            "1": 15,
+                            "2": "Suscipit laudantium nulla possimus aut.",
+                            "3": "Aut maxime voluptatem et quia placeat placeat qui. Rerum soluta voluptatem veniam voluptas eum consequatur. Eligendi accusamus provident et explicabo. Ut aut est id aut autem omnis quos eveniet.",
+                            "4": "Mollitia ab fuga labore est quisquam explicabo incidunt. Et ut iusto mollitia magnam quo labore. Sed asperiores voluptatum atque vero enim eveniet.",
+                            "5": "2008-04-11"
+                        },
+                        {
+                            "0": 66,
+                            "1": 16,
+                            "2": "Quisquam deleniti minima non.",
+                            "3": "Accusamus voluptatem voluptas iure ipsa sed sapiente. Et corporis neque quo perspiciatis eos aut odit. Quasi omnis ab qui earum. Et neque corporis perferendis quis vel ut et dolore.",
+                            "4": "Sint adipisci incidunt est fugiat porro et. Reiciendis non harum optio. Enim quis velit modi provident.",
+                            "5": "1990-10-24"
+                        },
+                        {
+                            "0": 67,
+                            "1": 17,
+                            "2": "Eum maiores asperiores ut et excepturi nulla officia veritatis.",
+                            "3": "Exercitationem ut et quis nisi veritatis et illum totam. Nesciunt autem voluptatibus officia vitae dignissimos magni dolor qui. Totam sed exercitationem sit eum vel.",
+                            "4": "Error nemo dolor distinctio unde pariatur hic. Odit ut facilis maiores saepe dolorum. Et voluptate enim nihil molestias molestias deserunt.",
+                            "5": "1979-08-17"
+                        },
+                        {
+                            "0": 68,
+                            "1": 18,
+                            "2": "Eveniet sint tempora porro.",
+                            "3": "Culpa similique nesciunt quae tempora quae laboriosam ea laudantium. Aut inventore quas quidem aut aut consequatur ducimus. Minus veritatis asperiores quia quod assumenda. Placeat nobis voluptatem consequatur aut iure consequatur.",
+                            "4": "Amet mollitia deserunt totam enim veniam quia. Voluptatem voluptatem officiis neque rerum.",
+                            "5": "1970-09-09"
+                        },
+                        {
+                            "0": 69,
+                            "1": 19,
+                            "2": "Provident consequatur minima dicta et maiores.",
+                            "3": "Laudantium adipisci sit non quia ab. Voluptas qui expedita ducimus eaque dolore alias. Aliquam voluptate voluptatem sint saepe voluptatem qui consequatur. Accusamus similique velit officiis consectetur. Ad ut aperiam asperiores est.",
+                            "4": "Qui laudantium odit cupiditate. At et atque distinctio aut qui impedit. Sed in est sed. Reiciendis laudantium voluptas accusamus excepturi sapiente temporibus consequatur.",
+                            "5": "2020-08-10"
+                        },
+                        {
+                            "0": 70,
+                            "1": 20,
+                            "2": "Ab modi ea voluptates qui tempore.",
+                            "3": "Excepturi aut eum eius. Perferendis earum modi ut modi ipsa libero et. Eos eaque excepturi id in vel facere.",
+                            "4": "Tenetur explicabo id aut. Maxime eum rem laborum cupiditate iusto. Id aperiam voluptatibus voluptate debitis quo soluta.",
+                            "5": "1978-03-07"
+                        },
+                        {
+                            "0": 71,
+                            "1": 21,
+                            "2": "Fuga et quasi pariatur aliquid quas.",
+                            "3": "Sapiente earum numquam qui ea est excepturi. Molestiae tenetur ut rerum rem.",
+                            "4": "Occaecati inventore possimus non voluptas. Quis esse dolores consequatur. Praesentium modi soluta dolorem dolores adipisci vel consequatur autem.",
+                            "5": "2010-09-10"
+                        },
+                        {
+                            "0": 72,
+                            "1": 22,
+                            "2": "Eius sapiente eaque vel id sunt reprehenderit.",
+                            "3": "Nemo voluptatem quia placeat laboriosam dolorum. Reiciendis doloremque quis nostrum similique quia et. Iste quas officiis laboriosam et.",
+                            "4": "Sunt quasi at beatae assumenda temporibus. Unde voluptatem asperiores voluptatem velit temporibus. Voluptatem culpa beatae sit voluptatibus.",
+                            "5": "1985-03-28"
+                        },
+                        {
+                            "0": 74,
+                            "1": 24,
+                            "2": "Ipsum omnis ex numquam nemo nesciunt sed.",
+                            "3": "Repellendus tempora error ex illum placeat et. Similique cum et a quam qui. Hic ea suscipit adipisci est at hic reprehenderit.",
+                            "4": "Ad quo non ea non perspiciatis rem eum. Voluptas distinctio sunt asperiores quae nihil ipsam. Quia beatae aut explicabo ut aut tenetur.",
+                            "5": "2014-03-24"
+                        },
+                        {
+                            "0": 75,
+                            "1": 25,
+                            "2": "Voluptates et sed nobis quasi nesciunt itaque expedita qui.",
+                            "3": "Et rerum omnis neque excepturi expedita enim facere est. Libero pariatur eum voluptatem vel delectus dicta voluptatem dolores. Molestiae aut et ad qui. Voluptatem velit aut voluptas.",
+                            "4": "Nobis voluptatem itaque maiores consequuntur. Quisquam quia accusamus quae. Aut delectus ullam delectus exercitationem in asperiores a doloremque.",
+                            "5": "1990-09-28"
+                        },
+                        {
+                            "0": 76,
+                            "1": 26,
+                            "2": "Repellat iure iste quaerat alias ut et.",
+                            "3": "Vel iste molestiae odio omnis et sunt. Quidem eaque repellat omnis et. Sit tempora ut omnis maiores modi debitis sed.",
+                            "4": "Voluptatem sunt dicta commodi placeat. Assumenda a eos quae magni quo. Ratione omnis officia tempore eaque necessitatibus. Tenetur laboriosam aut cum sed quo.",
+                            "5": "2004-07-09"
+                        },
+                        {
+                            "0": 77,
+                            "1": 27,
+                            "2": "Qui autem dolor sunt neque.",
+                            "3": "Tenetur adipisci voluptas suscipit. Maxime nulla sapiente sequi a quibusdam soluta in. Maiores dolorem animi dolorum voluptate at sunt qui porro.",
+                            "4": "Repellat quisquam beatae non excepturi minima reprehenderit omnis pariatur. Quisquam aut reprehenderit sapiente blanditiis.",
+                            "5": "1984-05-12"
+                        },
+                        {
+                            "0": 79,
+                            "1": 29,
+                            "2": "Necessitatibus veniam sint omnis nesciunt qui ea aliquid.",
+                            "3": "Rerum at voluptas assumenda. In saepe unde quisquam eum repellat id. Neque minus sunt est asperiores. Consequuntur et laudantium laboriosam quasi consectetur voluptatem nesciunt. Magni adipisci amet sunt deleniti.",
+                            "4": "Rem ut excepturi non inventore eum qui est. Totam et accusantium consequatur atque voluptas minima. Pariatur maiores facilis itaque est. Et eveniet eum eum dolor.",
+                            "5": "1973-03-19"
+                        },
+                        {
+                            "0": 80,
+                            "1": 30,
+                            "2": "Est et iure neque est.",
+                            "3": "Cum velit qui distinctio corporis saepe. Illo est blanditiis eum delectus labore. Id ratione aut corrupti at. Recusandae similique voluptatem quae et quia eos consequuntur consequatur.",
+                            "4": "Ullam ad quos omnis rem eos corporis. Eos id velit ad explicabo qui libero. Adipisci quam dolore et odio.",
+                            "5": "1988-10-28"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "authorId",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "title",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "description",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "content",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "date",
+                            "field": "5",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 51 records retrieved in 1.986ms"
+                    },
+                    "totalRowCount": 51,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Use a subquery to find posts that were written by a sponsored author\nSELECT *\nFROM Post\nWHERE authorId IN (\n    SELECT DISTINCT authorSponsored\n    FROM Sponsorship\n)",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 43,
+                "end": 49,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f978a59d-ac51-49eb-82d5-9e8945d0f174"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 122
+                        },
+                        "contentStart": 37,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "f978a59d-ac51-49eb-82d5-9e8945d0f174",
+                    "rows": [
+                        {
+                            "0": 2,
+                            "1": "Dan",
+                            "2": "McLaughlin",
+                            "3": "parker.felipa@example.org",
+                            "4": "1984-10-30",
+                            "5": "2005-04-10 14:34:57"
+                        },
+                        {
+                            "0": 8,
+                            "1": "Brionna",
+                            "2": "Hamill",
+                            "3": "cartwright.kenyatta@example.net",
+                            "4": "1995-09-30",
+                            "5": "2019-04-26 16:36:02"
+                        },
+                        {
+                            "0": 9,
+                            "1": "Marta",
+                            "2": "McKenzie",
+                            "3": "nichole.johns@example.com",
+                            "4": "1974-08-28",
+                            "5": "2010-01-14 02:45:47"
+                        },
+                        {
+                            "0": 10,
+                            "1": "Kasey",
+                            "2": "Runolfsson",
+                            "3": "lakin.lelia@example.org",
+                            "4": "1977-04-27",
+                            "5": "1995-07-17 03:02:45"
+                        },
+                        {
+                            "0": 14,
+                            "1": "Mya",
+                            "2": "Hettinger",
+                            "3": "gconsidine@example.net",
+                            "4": "1985-02-20",
+                            "5": "1982-01-23 07:07:12"
+                        },
+                        {
+                            "0": 15,
+                            "1": "Payton",
+                            "2": "Ortiz",
+                            "3": "jamie80@example.org",
+                            "4": "1976-09-26",
+                            "5": "1992-03-23 15:24:32"
+                        },
+                        {
+                            "0": 16,
+                            "1": "Ansel",
+                            "2": "Hahn",
+                            "3": "boehm.helmer@example.net",
+                            "4": "1995-08-02",
+                            "5": "1975-10-11 07:47:57"
+                        },
+                        {
+                            "0": 17,
+                            "1": "Kyra",
+                            "2": "Langosh",
+                            "3": "katheryn.jones@example.org",
+                            "4": "1984-09-28",
+                            "5": "1991-02-26 17:26:37"
+                        },
+                        {
+                            "0": 18,
+                            "1": "Harry",
+                            "2": "Hyatt",
+                            "3": "hailey32@example.com",
+                            "4": "1978-11-05",
+                            "5": "1991-01-17 22:26:17"
+                        },
+                        {
+                            "0": 22,
+                            "1": "Morris",
+                            "2": "Beier",
+                            "3": "wiza.sam@example.net",
+                            "4": "1989-02-24",
+                            "5": "2001-03-10 02:03:46"
+                        },
+                        {
+                            "0": 23,
+                            "1": "Missouri",
+                            "2": "Kshlerin",
+                            "3": "upacocha@example.net",
+                            "4": "1975-08-20",
+                            "5": "1981-04-25 10:54:15"
+                        },
+                        {
+                            "0": 24,
+                            "1": "Damon",
+                            "2": "Stroman",
+                            "3": "arvilla.lang@example.org",
+                            "4": "1993-08-16",
+                            "5": "1976-11-04 11:18:14"
+                        },
+                        {
+                            "0": 25,
+                            "1": "Josefina",
+                            "2": "Price",
+                            "3": "usanford@example.com",
+                            "4": "1973-08-28",
+                            "5": "2002-06-20 14:45:51"
+                        },
+                        {
+                            "0": 26,
+                            "1": "Jamaal",
+                            "2": "Okuneva",
+                            "3": "ankunding.margarette@example.org",
+                            "4": "1984-03-06",
+                            "5": "2013-12-01 12:15:03"
+                        },
+                        {
+                            "0": 27,
+                            "1": "Holly",
+                            "2": "Weber",
+                            "3": "burdette35@example.org",
+                            "4": "1992-08-16",
+                            "5": "1975-05-22 11:14:04"
+                        },
+                        {
+                            "0": 30,
+                            "1": "Donna",
+                            "2": "Stroman",
+                            "3": "ymarquardt@example.net",
+                            "4": "1977-10-29",
+                            "5": "1994-10-30 03:08:52"
+                        },
+                        {
+                            "0": 31,
+                            "1": "Krista",
+                            "2": "Jacobi",
+                            "3": "elizabeth.mann@example.net",
+                            "4": "1995-09-17",
+                            "5": "2019-07-24 06:09:39"
+                        },
+                        {
+                            "0": 32,
+                            "1": "Mariam",
+                            "2": "Marks",
+                            "3": "harber.rickey@example.net",
+                            "4": "1997-06-26",
+                            "5": "2009-07-29 10:49:35"
+                        },
+                        {
+                            "0": 34,
+                            "1": "Tomasa",
+                            "2": "Kuhlman",
+                            "3": "napoleon.king@example.com",
+                            "4": "1979-03-09",
+                            "5": "2021-12-29 23:18:42"
+                        },
+                        {
+                            "0": 35,
+                            "1": "Alejandra",
+                            "2": "Bahringer",
+                            "3": "mueller.lafayette@example.org",
+                            "4": "1995-12-17",
+                            "5": "2008-03-31 12:26:39"
+                        },
+                        {
+                            "0": 37,
+                            "1": "Aglae",
+                            "2": "Williamson",
+                            "3": "qquigley@example.com",
+                            "4": "1973-06-19",
+                            "5": "2001-11-20 11:47:45"
+                        },
+                        {
+                            "0": 40,
+                            "1": "Jerod",
+                            "2": "King",
+                            "3": "brown.williamson@example.com",
+                            "4": "1978-08-14",
+                            "5": "1991-06-10 17:31:11"
+                        },
+                        {
+                            "0": 41,
+                            "1": "Mireille",
+                            "2": "Kutch",
+                            "3": "mcclure.johnny@example.com",
+                            "4": "1984-05-11",
+                            "5": "2004-11-18 08:11:04"
+                        },
+                        {
+                            "0": 45,
+                            "1": "Gust",
+                            "2": "Bergstrom",
+                            "3": "thurman23@example.org",
+                            "4": "1996-11-01",
+                            "5": "1999-01-30 07:53:49"
+                        },
+                        {
+                            "0": 46,
+                            "1": "Luz",
+                            "2": "Ondricka",
+                            "3": "jailyn.jakubowski@example.org",
+                            "4": "1971-07-07",
+                            "5": "1981-06-04 19:33:46"
+                        },
+                        {
+                            "0": 47,
+                            "1": "Santino",
+                            "2": "Bernier",
+                            "3": "audrey.satterfield@example.net",
+                            "4": "1993-03-10",
+                            "5": "1994-08-27 22:42:55"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "firstName",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "lastName",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "email",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "birthdate",
+                            "field": "4",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "added",
+                            "field": "5",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 26 records retrieved in 0.996ms"
+                    },
+                    "totalRowCount": 26,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the youngest half of authors\nSELECT *\nFROM Author\nWHERE birthdate < (\n    SELECT AVG(birthdate)\n    FROM Author\n)",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 50,
+                "end": 60,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "cbefd236-0f29-4f93-f315-e99009f0130b"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 213
+                        },
+                        "contentStart": 40,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "cbefd236-0f29-4f93-f315-e99009f0130b",
+                    "rows": [
+                        {
+                            "0": 2,
+                            "1": "Dan",
+                            "2": "McLaughlin",
+                            "3": "parker.felipa@example.org",
+                            "4": "1984-10-30",
+                            "5": "2005-04-10 14:34:57"
+                        },
+                        {
+                            "0": 9,
+                            "1": "Marta",
+                            "2": "McKenzie",
+                            "3": "nichole.johns@example.com",
+                            "4": "1974-08-28",
+                            "5": "2010-01-14 02:45:47"
+                        },
+                        {
+                            "0": 10,
+                            "1": "Kasey",
+                            "2": "Runolfsson",
+                            "3": "lakin.lelia@example.org",
+                            "4": "1977-04-27",
+                            "5": "1995-07-17 03:02:45"
+                        },
+                        {
+                            "0": 15,
+                            "1": "Payton",
+                            "2": "Ortiz",
+                            "3": "jamie80@example.org",
+                            "4": "1976-09-26",
+                            "5": "1992-03-23 15:24:32"
+                        },
+                        {
+                            "0": 17,
+                            "1": "Kyra",
+                            "2": "Langosh",
+                            "3": "katheryn.jones@example.org",
+                            "4": "1984-09-28",
+                            "5": "1991-02-26 17:26:37"
+                        },
+                        {
+                            "0": 18,
+                            "1": "Harry",
+                            "2": "Hyatt",
+                            "3": "hailey32@example.com",
+                            "4": "1978-11-05",
+                            "5": "1991-01-17 22:26:17"
+                        },
+                        {
+                            "0": 23,
+                            "1": "Missouri",
+                            "2": "Kshlerin",
+                            "3": "upacocha@example.net",
+                            "4": "1975-08-20",
+                            "5": "1981-04-25 10:54:15"
+                        },
+                        {
+                            "0": 25,
+                            "1": "Josefina",
+                            "2": "Price",
+                            "3": "usanford@example.com",
+                            "4": "1973-08-28",
+                            "5": "2002-06-20 14:45:51"
+                        },
+                        {
+                            "0": 26,
+                            "1": "Jamaal",
+                            "2": "Okuneva",
+                            "3": "ankunding.margarette@example.org",
+                            "4": "1984-03-06",
+                            "5": "2013-12-01 12:15:03"
+                        },
+                        {
+                            "0": 30,
+                            "1": "Donna",
+                            "2": "Stroman",
+                            "3": "ymarquardt@example.net",
+                            "4": "1977-10-29",
+                            "5": "1994-10-30 03:08:52"
+                        },
+                        {
+                            "0": 34,
+                            "1": "Tomasa",
+                            "2": "Kuhlman",
+                            "3": "napoleon.king@example.com",
+                            "4": "1979-03-09",
+                            "5": "2021-12-29 23:18:42"
+                        },
+                        {
+                            "0": 37,
+                            "1": "Aglae",
+                            "2": "Williamson",
+                            "3": "qquigley@example.com",
+                            "4": "1973-06-19",
+                            "5": "2001-11-20 11:47:45"
+                        },
+                        {
+                            "0": 40,
+                            "1": "Jerod",
+                            "2": "King",
+                            "3": "brown.williamson@example.com",
+                            "4": "1978-08-14",
+                            "5": "1991-06-10 17:31:11"
+                        },
+                        {
+                            "0": 41,
+                            "1": "Mireille",
+                            "2": "Kutch",
+                            "3": "mcclure.johnny@example.com",
+                            "4": "1984-05-11",
+                            "5": "2004-11-18 08:11:04"
+                        },
+                        {
+                            "0": 46,
+                            "1": "Luz",
+                            "2": "Ondricka",
+                            "3": "jailyn.jakubowski@example.org",
+                            "4": "1971-07-07",
+                            "5": "1981-06-04 19:33:46"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "firstName",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "lastName",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "email",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "birthdate",
+                            "field": "4",
+                            "dataType": {
+                                "type": 27,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "added",
+                            "field": "5",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 15 records retrieved in 1.001ms"
+                    },
+                    "totalRowCount": 15,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the youngest quarter of authors\nSELECT *\nFROM Author\nWHERE birthdate < (\n    SELECT AVG(birthdate)\n    FROM Author\n    WHERE birthdate < (\n        SELECT AVG(birthdate) AS half\n        FROM Author\n    )\n)",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 61,
+                "end": 71,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "3e21add7-a1d1-444c-ab9f-6b6aef7e82e2"
+                    ]
+                },
+                "currentHeight": 351.984375,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 285
+                        },
+                        "contentStart": 42,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 285,
+                            "length": 0
+                        },
+                        "contentStart": 284,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "3e21add7-a1d1-444c-ab9f-6b6aef7e82e2",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": 2
+                        },
+                        {
+                            "0": 2,
+                            "1": 2
+                        },
+                        {
+                            "0": 3,
+                            "1": 2
+                        },
+                        {
+                            "0": 4,
+                            "1": 2
+                        },
+                        {
+                            "0": 10,
+                            "1": 2
+                        },
+                        {
+                            "0": 11,
+                            "1": 2
+                        },
+                        {
+                            "0": 12,
+                            "1": 2
+                        },
+                        {
+                            "0": 13,
+                            "1": 2
+                        },
+                        {
+                            "0": 14,
+                            "1": 2
+                        },
+                        {
+                            "0": 15,
+                            "1": 2
+                        },
+                        {
+                            "0": 16,
+                            "1": 2
+                        },
+                        {
+                            "0": 17,
+                            "1": 2
+                        },
+                        {
+                            "0": 18,
+                            "1": 2
+                        },
+                        {
+                            "0": 19,
+                            "1": 2
+                        },
+                        {
+                            "0": 20,
+                            "1": 2
+                        },
+                        {
+                            "0": 21,
+                            "1": 2
+                        },
+                        {
+                            "0": 22,
+                            "1": 2
+                        },
+                        {
+                            "0": 24,
+                            "1": 2
+                        },
+                        {
+                            "0": 25,
+                            "1": 2
+                        },
+                        {
+                            "0": 26,
+                            "1": 2
+                        },
+                        {
+                            "0": 27,
+                            "1": 2
+                        },
+                        {
+                            "0": 29,
+                            "1": 2
+                        },
+                        {
+                            "0": 30,
+                            "1": 2
+                        },
+                        {
+                            "0": 31,
+                            "1": 2
+                        },
+                        {
+                            "0": 32,
+                            "1": 2
+                        },
+                        {
+                            "0": 33,
+                            "1": 2
+                        },
+                        {
+                            "0": 34,
+                            "1": 2
+                        },
+                        {
+                            "0": 35,
+                            "1": 2
+                        },
+                        {
+                            "0": 36,
+                            "1": 2
+                        },
+                        {
+                            "0": 37,
+                            "1": 2
+                        },
+                        {
+                            "0": 38,
+                            "1": 2
+                        },
+                        {
+                            "0": 40,
+                            "1": 2
+                        },
+                        {
+                            "0": 41,
+                            "1": 2
+                        },
+                        {
+                            "0": 42,
+                            "1": 2
+                        },
+                        {
+                            "0": 43,
+                            "1": 2
+                        },
+                        {
+                            "0": 45,
+                            "1": 2
+                        },
+                        {
+                            "0": 46,
+                            "1": 2
+                        },
+                        {
+                            "0": 47,
+                            "1": 2
+                        },
+                        {
+                            "0": 48,
+                            "1": 2
+                        },
+                        {
+                            "0": 49,
+                            "1": 2
+                        },
+                        {
+                            "0": 50,
+                            "1": 2
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "COUNT(*)",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 41 records retrieved in 2.008ms"
+                    },
+                    "totalRowCount": 41,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the author(s) with the most posts\nSELECT a.id, COUNT(*)\nFROM Author AS a INNER JOIN Post\n    ON a.id = authorId\nGROUP BY a.id\nHAVING COUNT(*) >= ALL (\n    SELECT DISTINCT COUNT(*) as postCount\n    FROM Author AS a INNER JOIN Post\n        ON a.id = authorId\n    GROUP BY a.id\n)",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 72,
+                "end": 83,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "22654b14-3662-4f13-9e67-7ba4cf8c138e"
+                    ]
+                },
+                "currentHeight": 351.984375,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 347
+                        },
+                        "contentStart": 82,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "acd114cf-11b5-4c47-8a8f-54aa3f0fb852",
+                    "resultId": "22654b14-3662-4f13-9e67-7ba4cf8c138e",
+                    "rows": [
+                        {
+                            "0": 5,
+                            "1": "6484"
+                        },
+                        {
+                            "0": 6,
+                            "1": "15150"
+                        },
+                        {
+                            "0": 7,
+                            "1": "18719"
+                        },
+                        {
+                            "0": 8,
+                            "1": "4192"
+                        },
+                        {
+                            "0": 9,
+                            "1": "4884"
+                        },
+                        {
+                            "0": 10,
+                            "1": "14168"
+                        },
+                        {
+                            "0": 11,
+                            "1": "4054"
+                        },
+                        {
+                            "0": 14,
+                            "1": "4335"
+                        },
+                        {
+                            "0": 18,
+                            "1": "9401"
+                        },
+                        {
+                            "0": 19,
+                            "1": "2012"
+                        },
+                        {
+                            "0": 20,
+                            "1": "8379"
+                        },
+                        {
+                            "0": 21,
+                            "1": "7701"
+                        },
+                        {
+                            "0": 23,
+                            "1": "7670"
+                        },
+                        {
+                            "0": 27,
+                            "1": "21576"
+                        },
+                        {
+                            "0": 30,
+                            "1": "3678"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "authorSponsored",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "SUM(amount)",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 15 records retrieved in 0.982ms"
+                    },
+                    "totalRowCount": 15,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Find the authors with less than the average total amount of sponsorship money \nSELECT authorSponsored, SUM(amount)\nFROM Sponsorship\nGROUP BY authorSponsored\nHAVING SUM(amount) < (\n    SELECT AVG(sponsorAmount)\n    FROM (\n        SELECT SUM(amount) AS sponsorAmount\n        FROM sponsorship\n        GROUP BY authorSponsored\n        ) AS a\n    )",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 84,
+                "end": 85,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 135
+                        },
+                        "contentStart": 0,
+                        "state": 1
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "review.sql",
+    "content": "CREATE DATABASE inventory;\nUSE inventory;\n\nCREATE TABLE Item (\n    itemId CHAR(50) PRIMARY KEY,\n    commonName TEXT NOT NULL,\n    vendorId INT UNSIGNED\n);\n\nCREATE TABLE Stock (\n    stockId INT UNSIGNED PRIMARY KEY,\n    itemId CHAR(50),\n    bayLocation CHAR(50),\n    quantity INT UNSIGNED,\n    lastUpdated DATETIME,\n    FOREIGN KEY itemId REFERENCES Item(itemId),\n    FOREIGN KEY bayLocation REFERENCES Bay(bayId)\n);\n\nCREATE TABLE Bay (\n    bayId CHAR(50) UNSIGNED PRIMARY KEY,\n    warehouseId INT UNSIGNED,\n    location VARCHAR(255)\n);\n\nCREATE TABLE Warehouse (\n    warehouseId INT UNSIGNED PRIMARY KEY,\n    name VARCHAR(255),\n    streetAddress VARCHAR(255),\n    city VARCHAR(255),\n    state CHAR(2),\n    zip SMALLINT UNSIGNED\n);",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": null,
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 33,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 26
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 26,
+                            "length": 15
+                        },
+                        "contentStart": 27,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 41,
+                            "length": 113
+                        },
+                        "contentStart": 43,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 154,
+                            "length": 261
+                        },
+                        "contentStart": 156,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 415,
+                            "length": 120
+                        },
+                        "contentStart": 417,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 535,
+                            "length": 194
+                        },
+                        "contentStart": 537,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+<p>
+{% if current_hours %}
+    Hours walked so far:
+    <ul>
+    {% for entry in current_hours %}
+        <li>
+            {{ entry.hours }} - {{ entry.dateWalked }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    No hours entered yet.
+</p>
+{% endif %}
+
+Enter new hours:
+<form action="{% url 'hours' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+Delete an hour:
+<form action="{% url 'delete' %}" method="post">
+    {% csrf_token %}
+    {{ delete }}
+    <input type="submit" value="Delete"
+</form>

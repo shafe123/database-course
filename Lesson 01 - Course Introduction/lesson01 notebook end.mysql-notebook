@@ -1,0 +1,791 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\nSHOW DATABASES;\nUSE ap;\nSHOW TABLES;\nSELECT * FROM invoice_archive LIMIT 10;\nSELECT * FROM vendors LIMIT 10;\nDROP DATABASE lesson01;\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 7,
+                    "column": 24
+                },
+                "position": {
+                    "lineNumber": 7,
+                    "column": 24
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 3,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 41
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "1e31698f-0e03-4d8a-b103-1a74c4d87069"
+                    ]
+                },
+                "currentHeight": 233.59375,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 15
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "3f35da12-a93f-4ba5-ea10-3e841154d317",
+                    "resultId": "1e31698f-0e03-4d8a-b103-1a74c4d87069",
+                    "rows": [
+                        {
+                            "0": "ap"
+                        },
+                        {
+                            "0": "ex"
+                        },
+                        {
+                            "0": "information_schema"
+                        },
+                        {
+                            "0": "mysql"
+                        },
+                        {
+                            "0": "om"
+                        },
+                        {
+                            "0": "performance_schema"
+                        },
+                        {
+                            "0": "sys"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Database",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 7 records retrieved in 6.496ms"
+                    },
+                    "totalRowCount": 7,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SHOW DATABASES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c76258b7-8681-451b-e841-9dfdcb2a6351",
+                            "content": "OK, 0 records retrieved in 1.025ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 7
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 4,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "e0f78d0d-e37b-4d24-d4cb-7a38de5f0f0d"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "3f35da12-a93f-4ba5-ea10-3e841154d317",
+                    "resultId": "e0f78d0d-e37b-4d24-d4cb-7a38de5f0f0d",
+                    "rows": [
+                        {
+                            "0": "active_invoices"
+                        },
+                        {
+                            "0": "color_sample"
+                        },
+                        {
+                            "0": "customers"
+                        },
+                        {
+                            "0": "date_sample"
+                        },
+                        {
+                            "0": "departments"
+                        },
+                        {
+                            "0": "employees"
+                        },
+                        {
+                            "0": "engine_sample"
+                        },
+                        {
+                            "0": "float_sample"
+                        },
+                        {
+                            "0": "null_sample"
+                        },
+                        {
+                            "0": "paid_invoices"
+                        },
+                        {
+                            "0": "projects"
+                        },
+                        {
+                            "0": "sales_reps"
+                        },
+                        {
+                            "0": "sales_totals"
+                        },
+                        {
+                            "0": "string_sample"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Tables_in_ex",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 14 records retrieved in 4.518ms"
+                    },
+                    "totalRowCount": 14,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SHOW TABLES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 5,
+                "end": 5,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "5dba8e6f-a7be-4c09-eff8-a3b6802c8af0",
+                            "content": "OK, 0 records retrieved in 1.756ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 39
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 6,
+                "end": 6,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "08232d87-2972-4311-b502-b27f2c774bab"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 31
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "3f35da12-a93f-4ba5-ea10-3e841154d317",
+                    "resultId": "08232d87-2972-4311-b502-b27f2c774bab",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "US Postal Service",
+                            "2": "Attn:  Supt. Window Services",
+                            "3": "PO Box 7005",
+                            "4": "Madison",
+                            "5": "WI",
+                            "6": "53707",
+                            "7": "(800) 555-1205",
+                            "8": "Alberto",
+                            "9": "Francesco",
+                            "10": 1,
+                            "11": 552
+                        },
+                        {
+                            "0": 2,
+                            "1": "National Information Data Ctr",
+                            "2": "PO Box 96621",
+                            "3": null,
+                            "4": "Washington",
+                            "5": "DC",
+                            "6": "20120",
+                            "7": "(301) 555-8950",
+                            "8": "Irvin",
+                            "9": "Ania",
+                            "10": 3,
+                            "11": 540
+                        },
+                        {
+                            "0": 3,
+                            "1": "Register of Copyrights",
+                            "2": "Library Of Congress",
+                            "3": null,
+                            "4": "Washington",
+                            "5": "DC",
+                            "6": "20559",
+                            "7": null,
+                            "8": "Liana",
+                            "9": "Lukas",
+                            "10": 3,
+                            "11": 403
+                        },
+                        {
+                            "0": 4,
+                            "1": "Jobtrak",
+                            "2": "1990 Westwood Blvd Ste 260",
+                            "3": null,
+                            "4": "Los Angeles",
+                            "5": "CA",
+                            "6": "90025",
+                            "7": "(800) 555-8725",
+                            "8": "Quinn",
+                            "9": "Kenzie",
+                            "10": 3,
+                            "11": 572
+                        },
+                        {
+                            "0": 5,
+                            "1": "Newbrige Book Clubs",
+                            "2": "3000 Cindel Drive",
+                            "3": null,
+                            "4": "Washington",
+                            "5": "NJ",
+                            "6": "07882",
+                            "7": "(800) 555-9980",
+                            "8": "Marks",
+                            "9": "Michelle",
+                            "10": 4,
+                            "11": 394
+                        },
+                        {
+                            "0": 6,
+                            "1": "California Chamber Of Commerce",
+                            "2": "3255 Ramos Cir",
+                            "3": null,
+                            "4": "Sacramento",
+                            "5": "CA",
+                            "6": "95827",
+                            "7": "(916) 555-6670",
+                            "8": "Mauro",
+                            "9": "Anton",
+                            "10": 3,
+                            "11": 572
+                        },
+                        {
+                            "0": 7,
+                            "1": "Towne Advertiser's Mailing Svcs",
+                            "2": "Kevin Minder",
+                            "3": "3441 W Macarthur Blvd",
+                            "4": "Santa Ana",
+                            "5": "CA",
+                            "6": "92704",
+                            "7": null,
+                            "8": "Maegen",
+                            "9": "Ted",
+                            "10": 3,
+                            "11": 540
+                        },
+                        {
+                            "0": 8,
+                            "1": "BFI Industries",
+                            "2": "PO Box 9369",
+                            "3": null,
+                            "4": "Fresno",
+                            "5": "CA",
+                            "6": "93792",
+                            "7": "(559) 555-1551",
+                            "8": "Kaleigh",
+                            "9": "Erick",
+                            "10": 3,
+                            "11": 521
+                        },
+                        {
+                            "0": 9,
+                            "1": "Pacific Gas & Electric",
+                            "2": "Box 52001",
+                            "3": null,
+                            "4": "San Francisco",
+                            "5": "CA",
+                            "6": "94152",
+                            "7": "(800) 555-6081",
+                            "8": "Anthoni",
+                            "9": "Kaitlyn",
+                            "10": 3,
+                            "11": 521
+                        },
+                        {
+                            "0": 10,
+                            "1": "Robbins Mobile Lock And Key",
+                            "2": "4669 N Fresno",
+                            "3": null,
+                            "4": "Fresno",
+                            "5": "CA",
+                            "6": "93726",
+                            "7": "(559) 555-9375",
+                            "8": "Leigh",
+                            "9": "Bill",
+                            "10": 2,
+                            "11": 523
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "vendor_id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": true
+                        },
+                        {
+                            "title": "vendor_name",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "vendor_address1",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "vendor_address2",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "vendor_city",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "vendor_state",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "vendor_zip_code",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "vendor_phone",
+                            "field": "7",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "vendor_contact_last_name",
+                            "field": "8",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "vendor_contact_first_name",
+                            "field": "9",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "default_terms_id",
+                            "field": "10",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "default_account_number",
+                            "field": "11",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 0.975ms"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM vendors LIMIT 10",
+                    "updatable": true,
+                    "fullTableName": "vendors"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 7,
+                "end": 7,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "8d5b9800-c775-462a-efee-84d33c7aaa73",
+                            "content": "OK, 1 row affected in 38.743ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 23
+                        },
+                        "contentStart": 1,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 8,
+                "end": 8,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

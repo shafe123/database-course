@@ -1,0 +1,284 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "USE cartoon_equipment;\n-- sums total order price\nSELECT orderNumber, SUM(quantity * itemPrice)\nFROM OrderItem\nGROUP BY orderNumber\nORDER BY SUM(quantity * itemPrice) DESC;\n\nSELECT CustomerOrder.orderNumber, SUM(quantity * itemPrice)\nFROM OrderItem\n    RIGHT JOIN CustomerOrder \n        ON OrderItem.orderNumber = CustomerOrder.orderNumber\nGROUP BY orderNumber\nORDER BY SUM(quantity * itemPrice) DESC;\n-- how many orders each customer has\nSELECT customerId, COUNT(orderNumber)\nFROM CustomerOrder\nGROUP BY customerId;\n\nSELECT Customer.customerId, COUNT(orderNumber)\nFROM CustomerOrder\n    RIGHT JOIN Customer\n        ON Customer.customerId = CustomerOrder.customerId\nGROUP BY customerId;\n-- list all products with 1 or 0 notes\nSELECT p.productId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p \n    LEFT JOIN ProductNote as pn \n        ON p.productId = pn.productId\nGROUP BY p.productId\nHAVING numberOfNotes in (0, 1);\n\nSELECT productId -- slightly different\nFROM productnote\nGROUP BY productId\nHAVING COUNT(*) = 1\nUNION\nSELECT product.productId\nFROM Product LEFT JOIN ProductNote\n    ON Product.productId = ProductNote.productId\nWHERE ProductNote.productId IS NULL; \n-- how many product notes each vendor has in 2005\nSELECT vendorId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p\n    INNER JOIN ProductNote as pn \n        ON p.productId = pn.productId\nWHERE (pn.noteDate >= '2005-01-01' AND pn.noteDate < '2006-01-01') \nGROUP BY vendorId;\n\nSELECT vendorId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p\n    LEFT JOIN ProductNote as pn \n        ON p.productId = pn.productId\nWHERE (pn.noteDate >= '2005-01-01' AND pn.noteDate < '2006-01-01') \nGROUP BY vendorId;\n\nSELECT vendorId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p\n    LEFT JOIN ProductNote as pn \n        ON p.productId = pn.productId\nWHERE (pn.noteDate >= '2005-01-01' AND pn.noteDate < '2006-01-01') OR pn.noteDate IS NULL\nGROUP BY vendorId;\n\nSELECT vendorId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p\n    LEFT JOIN ProductNote as pn \n        ON p.productId = pn.productId\nWHERE YEAR(pn.noteDate) = 2005 OR pn.noteDate IS NULL\nGROUP BY vendorId;\n\nSELECT vendorId, COUNT(pn.noteId) as 'numberOfNotes'\nFROM Product as p\n    LEFT JOIN ProductNote as pn \n        ON p.productId = pn.productId\nWHERE pn.noteDate LIKE '2005%'\nGROUP BY vendorId;\n-- GROUP BY vendorName; this is bad\nSELECT orderNumber\nFROM OrderItem\nWHERE quantity >= 5\nGROUP BY orderNumber\nHAVING COUNT(*) >= 2;\n\nSELECT orderitem.orderNumber, COUNT(orderitem.orderItem) as total_items\nFROM customerorder\n    LEFT JOIN orderitem\n        ON customerorder.orderNumber = orderitem.orderNumber\nWHERE orderitem.quantity >= 5\nGROUP BY orderitem.orderNumber\nHAVING COUNT(orderitem.orderItem) >= 2;\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 77,
+                    "column": 19
+                },
+                "position": {
+                    "lineNumber": 77,
+                    "column": 19
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 1,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 0
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "1895d8b2-d9a1-43b3-c225-80bc06f78fee",
+                            "content": "OK, 0 records retrieved in 0s"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 22
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 13,
+                "language": "mysql",
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 148
+                        },
+                        "contentStart": 26,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 148,
+                            "length": 229
+                        },
+                        "contentStart": 150,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 14,
+                "end": 23,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 114
+                        },
+                        "contentStart": 37,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 114,
+                            "length": 170
+                        },
+                        "contentStart": 116,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 24,
+                "end": 40,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 237
+                        },
+                        "contentStart": 39,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 237,
+                            "length": 248
+                        },
+                        "contentStart": 239,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 485,
+                            "length": 1
+                        },
+                        "contentStart": 484,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 41,
+                "end": 76,
+                "language": "mysql",
+                "currentSet": 5,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 279
+                        },
+                        "contentStart": 50,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 279,
+                            "length": 230
+                        },
+                        "contentStart": 281,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 509,
+                            "length": 252
+                        },
+                        "contentStart": 511,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 761,
+                            "length": 216
+                        },
+                        "contentStart": 763,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 977,
+                            "length": 193
+                        },
+                        "contentStart": 979,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1170,
+                            "length": 36
+                        },
+                        "contentStart": 1170,
+                        "state": 1
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 77,
+                "end": 89,
+                "language": "mysql",
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 96
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 96,
+                            "length": 278
+                        },
+                        "contentStart": 98,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 90,
+                "end": 90,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

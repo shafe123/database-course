@@ -1,0 +1,480 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "USE cartoon_equipment;\n-- show customer id and name for customers that purchased a product with a product note\nSELECT DISTINCT c.customerId, c.customerName\nFROM Customer AS c\n    INNER JOIN CustomerOrder AS co\n        ON c.customerId = co.customerId\n    INNER JOIN OrderItem AS oi\n        ON oi.orderNumber = co.orderNumber\n    INNER JOIN Product AS p\n        ON p.productId = oi.productId\n    INNER JOIN ProductNote AS pn\n        ON p.productId = pn.productId;\n\nSELECT customerId, customerName\nFROM customer\nWHERE customerId IN (\n    SELECT DISTINCT customerId\n    FROM CustomerOrder AS co INNER JOIN OrderItem as oi\n        ON co.orderNumber = oi.orderNumber\n    WHERE productId IN (\n        SELECT DISTINCT p.productId\n        FROM Product AS p INNER JOIN ProductNote AS pn\n            ON p.productId = pn.productId\n    )\n);\n-- show customer id, name, total value of orders by customer\nSELECT c.customerId, SUM(orderTotal)\nFROM CustomerOrder AS co \n    INNER JOIN (\n        SELECT orderNumber, SUM(quantity * itemPrice) AS orderTotal\n        FROM OrderItem\n        GROUP BY orderNumber\n    ) AS ot\n    ON co.orderNumber = ot.orderNumber\n    RIGHT JOIN Customer AS c ON\n        c.customerId = co.customerId\nGROUP BY c.customerId;\nSELECT orderNumber, SUM(quantity * itemPrice) AS orderTotal\n        FROM OrderItem\n        GROUP BY orderNumber;\n-- customers who have an order on or after 01-oct-2005\nSELECT *\nFROM Customer\nWHERE customerId IN (\n    SELECT customerId\n    FROM CustomerOrder\n    WHERE orderDate >= '2005-10-01'\n);\n\nSELECT *\nFROM Customer AS c INNER JOIN (\n        SELECT customerId\n        FROM CustomerOrder\n        WHERE orderDate >= '2005-10-01'\n    ) AS dateFilter\n    ON c.customerId = dateFilter.customerId;\n-- average total quantity of items per order\nSELECT AVG(orderQuantity)\nFROM (\n    SELECT SUM(quantity) as orderQuantity\n    FROM OrderItem\n    GROUP BY orderNumber\n) AS a;\n-- product id and product name with more than the avg number of product notes\nSELECT p.productId, p.productName, COUNT(pn.productId)\nFROM Product AS p LEFT JOIN ProductNote AS pn\n    ON p.productId = pn.productId\nGROUP BY productId, productName\nHAVING COUNT(pn.productId) > (\n    SELECT AVG(nc.noteCount)\n    FROM (\n        SELECT COUNT(pn.productId) AS noteCount\n        FROM Product AS p LEFT JOIN ProductNote AS pn\n            ON p.productId = pn.productId\n        GROUP BY p.productId\n        ) AS nc\n    );\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 26,
+                    "column": 30
+                },
+                "position": {
+                    "lineNumber": 26,
+                    "column": 30
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 16,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -6
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "a0a424b0-be75-4b69-cd71-a056fd43716e",
+                            "content": "OK, 0 records retrieved in 1ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 22
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 25,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 438
+                        },
+                        "contentStart": 88,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 438,
+                            "length": 366
+                        },
+                        "contentStart": 440,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 26,
+                "end": 37,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "0edff40a-e7ca-46dc-9677-cdd5cc28c07e"
+                    ]
+                },
+                "currentHeight": 136.71875,
+                "currentSet": 0,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 403
+                        },
+                        "contentStart": 61,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 403,
+                            "length": 4
+                        },
+                        "contentStart": 404,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "880f8a9d-d050-47b6-f754-ad295c61b1c6",
+                    "resultId": "0edff40a-e7ca-46dc-9677-cdd5cc28c07e",
+                    "rows": [
+                        {
+                            "0": 10001,
+                            "1": "188.34"
+                        },
+                        {
+                            "0": 10002,
+                            "1": null
+                        },
+                        {
+                            "0": 10003,
+                            "1": "55.00"
+                        },
+                        {
+                            "0": 10004,
+                            "1": "1000.00"
+                        },
+                        {
+                            "0": 10005,
+                            "1": "125.00"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "customerId",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "SUM(orderTotal)",
+                            "field": "1",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 5 records retrieved in 0.97ms"
+                    },
+                    "totalRowCount": 5,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- show customer id, name, total value of orders by customer\nSELECT c.customerId, SUM(orderTotal)\nFROM CustomerOrder AS co \n    INNER JOIN (\n        SELECT orderNumber, SUM(quantity * itemPrice) AS orderTotal\n        FROM OrderItem\n        GROUP BY orderNumber\n    ) AS ot\n    ON co.orderNumber = ot.orderNumber\n    RIGHT JOIN Customer AS c ON\n        c.customerId = co.customerId\nGROUP BY c.customerId",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 38,
+                "end": 56,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 112
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 112,
+                            "length": 184
+                        },
+                        "contentStart": 168,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 296,
+                            "length": 200
+                        },
+                        "contentStart": 298,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 57,
+                "end": 63,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "122997df-cb57-4a78-929f-31918b043c64"
+                    ]
+                },
+                "currentHeight": 90.78125,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 171
+                        },
+                        "contentStart": 45,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "880f8a9d-d050-47b6-f754-ad295c61b1c6",
+                    "resultId": "122997df-cb57-4a78-929f-31918b043c64",
+                    "rows": [
+                        {
+                            "0": "34.8000"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "AVG(orderQuantity)",
+                            "field": "0",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0s"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- average total quantity of items per order\nSELECT AVG(orderQuantity)\nFROM (\n    SELECT SUM(quantity) as orderQuantity\n    FROM OrderItem\n    GROUP BY orderNumber\n) AS a",
+                    "updatable": true,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 64,
+                "end": 77,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "979e7966-3ad2-48cc-b785-54da25146b0f"
+                    ]
+                },
+                "currentHeight": 162.265625,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 511
+                        },
+                        "contentStart": 78,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 511,
+                            "length": 1
+                        },
+                        "contentStart": 510,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "880f8a9d-d050-47b6-f754-ad295c61b1c6",
+                    "resultId": "979e7966-3ad2-48cc-b785-54da25146b0f",
+                    "rows": [
+                        {
+                            "0": "ANV01",
+                            "1": ".5 ton anvil",
+                            "2": 2
+                        },
+                        {
+                            "0": "FC",
+                            "1": "Carrots",
+                            "2": 2
+                        },
+                        {
+                            "0": "SAFE",
+                            "1": "Safe",
+                            "2": 4
+                        },
+                        {
+                            "0": "TNT2",
+                            "1": "TNT (5 sticks)",
+                            "2": 3
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "productId",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "productName",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "COUNT(pn.productId)",
+                            "field": "2",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 4 records retrieved in 3.008ms"
+                    },
+                    "totalRowCount": 4,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- product id and product name with more than the avg number of product notes\nSELECT p.productId, p.productName, COUNT(pn.productId)\nFROM Product AS p LEFT JOIN ProductNote AS pn\n    ON p.productId = pn.productId\nGROUP BY productId, productName\nHAVING COUNT(pn.productId) > (\n    SELECT AVG(nc.noteCount)\n    FROM (\n        SELECT COUNT(pn.productId) AS noteCount\n        FROM Product AS p LEFT JOIN ProductNote AS pn\n            ON p.productId = pn.productId\n        GROUP BY p.productId\n        ) AS nc\n    )",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 78,
+                "end": 78,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

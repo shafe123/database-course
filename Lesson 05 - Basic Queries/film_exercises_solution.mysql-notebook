@@ -1,0 +1,3065 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "USE films;\nSHOW TABLES;\n-- Display the first ten films, only show the title, release year, and rating\nSELECT title, release_year, rating\nFROM film\nLIMIT 10;\n-- Display the longest ten films, show the title, release year, and length.\nSELECT title, release_year, length\nFROM film\nORDER BY length DESC\nLIMIT 10;\n-- Display the movies who are between the 20th and 30th longest movies.\nSELECT title, release_year, length\nFROM film\nORDER BY length DESC\nLIMIT 10\nOFFSET 20;\n-- Display films that have a length of 50 or less.\nSELECT title, length\nFROM film\nWHERE length <= 50;\n-- Display films that are rated R and have a rental duration of 7 or more\nSELECT title, rating, rental_duration\nFROM film\nWHERE rating = 'R' AND rental_duration >= 7;\n-- Display R or NC-17 -rated films where the replacement cost is less than the rate times duration\nSELECT title, rating, rental_duration, rental_rate, replacement_cost\nFROM film\nWHERE (rating = 'R' OR rating = 'NC-17') AND replacement_cost < rental_rate * rental_duration;\n-- Display films that start with the word CAUSE\nSELECT title\nFROM film\nWHERE title LIKE 'cause%';\n-- Display films that end with the word CAUSE\nSELECT title\nFROM film\nWHERE title LIKE '%cause';\n-- Display films that have CAUSE anywhere in the title\nSELECT title\nFROM film\nWHERE title like '%cause%';\n-- Display all release years present in the film table (no duplicates).\nSELECT DISTINCT release_year\nFROM film;\nSELECT title, rental_duration, rental_rate, rental_duration * rental_rate AS `rental_fee`\nFROM film\nLIMIT 10;\nSELECT SIN(PI()/4) AS `random_math`;\nSELECT IF(500<1000, \"happy\", \"sad\") AS `mask`;\n-- Use functions to determine if a movie is PG rated or not  (do not use an OR criteria)\nSELECT title, rating\nFROM film\nWHERE LEFT(rating, 2) = \"PG\"\nLIMIT 10;\n-- Convert the length (in minutes) to time in hours + minutes:  125 becomes 2 hr. 5 min.\nSELECT title, length, FLOOR(length / 60) AS `hours`, MOD(length, 60) AS `minutes`, CONCAT(FLOOR(length / 60), ' hrs. ', MOD(length, 60), ' min.') AS `time`\nFROM film\nLIMIT 10;\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 2,
+                    "column": 13
+                },
+                "position": {
+                    "lineNumber": 2,
+                    "column": 13
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 1,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 0
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "a21a4bf4-3f30-4806-c8b4-657790eb783a",
+                            "content": "OK, 0 records retrieved in 1ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 10
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "04708bd7-c11a-4d4f-c22a-89c9db8f6209"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 12
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "04708bd7-c11a-4d4f-c22a-89c9db8f6209",
+                    "rows": [
+                        {
+                            "0": "actor"
+                        },
+                        {
+                            "0": "actor_info"
+                        },
+                        {
+                            "0": "address"
+                        },
+                        {
+                            "0": "category"
+                        },
+                        {
+                            "0": "city"
+                        },
+                        {
+                            "0": "country"
+                        },
+                        {
+                            "0": "customer"
+                        },
+                        {
+                            "0": "customer_list"
+                        },
+                        {
+                            "0": "film"
+                        },
+                        {
+                            "0": "film_actor"
+                        },
+                        {
+                            "0": "film_category"
+                        },
+                        {
+                            "0": "film_list"
+                        },
+                        {
+                            "0": "film_text"
+                        },
+                        {
+                            "0": "inventory"
+                        },
+                        {
+                            "0": "language"
+                        },
+                        {
+                            "0": "nicer_but_slower_film_list"
+                        },
+                        {
+                            "0": "payment"
+                        },
+                        {
+                            "0": "rental"
+                        },
+                        {
+                            "0": "sales_by_film_category"
+                        },
+                        {
+                            "0": "sales_by_store"
+                        },
+                        {
+                            "0": "staff"
+                        },
+                        {
+                            "0": "staff_list"
+                        },
+                        {
+                            "0": "store"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Tables_in_films",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 23 records retrieved in 2.994ms"
+                    },
+                    "totalRowCount": 23,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SHOW TABLES",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 6,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "4bd4e3b0-4dd3-4fec-e97c-17a51fc40f8c"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 132
+                        },
+                        "contentStart": 78,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "4bd4e3b0-4dd3-4fec-e97c-17a51fc40f8c",
+                    "rows": [
+                        {
+                            "0": "ACADEMY DINOSAUR",
+                            "1": 2006,
+                            "2": "PG"
+                        },
+                        {
+                            "0": "ACE GOLDFINGER",
+                            "1": 2006,
+                            "2": "G"
+                        },
+                        {
+                            "0": "ADAPTATION HOLES",
+                            "1": 2006,
+                            "2": "NC-17"
+                        },
+                        {
+                            "0": "AFFAIR PREJUDICE",
+                            "1": 2006,
+                            "2": "G"
+                        },
+                        {
+                            "0": "AFRICAN EGG",
+                            "1": 2006,
+                            "2": "G"
+                        },
+                        {
+                            "0": "AGENT TRUMAN",
+                            "1": 2006,
+                            "2": "PG"
+                        },
+                        {
+                            "0": "AIRPLANE SIERRA",
+                            "1": 2006,
+                            "2": "PG-13"
+                        },
+                        {
+                            "0": "AIRPORT POLLOCK",
+                            "1": 2006,
+                            "2": "R"
+                        },
+                        {
+                            "0": "ALABAMA DEVIL",
+                            "1": 2006,
+                            "2": "PG-13"
+                        },
+                        {
+                            "0": "ALADDIN CALENDAR",
+                            "1": 2006,
+                            "2": "NC-17"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "release_year",
+                            "field": "1",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rating",
+                            "field": "2",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 0.999ms"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, release_year, rating\nFROM film\nLIMIT 10",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 7,
+                "end": 11,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "9c8f7227-79b6-4a7b-c916-a61fb5d3680c"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 151
+                        },
+                        "contentStart": 76,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "9c8f7227-79b6-4a7b-c916-a61fb5d3680c",
+                    "rows": [
+                        {
+                            "0": "DARN FORRESTER",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "POND SEATTLE",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "CHICAGO NORTH",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "MUSCLE BRIGHT",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "WORST BANGER",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "GANGS PRIDE",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "SOLDIERS EVOLUTION",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "HOME PITY",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "SWEET BROTHERHOOD",
+                            "1": 2006,
+                            "2": 185
+                        },
+                        {
+                            "0": "CONTROL ANTHEM",
+                            "1": 2006,
+                            "2": 185
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "release_year",
+                            "field": "1",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "length",
+                            "field": "2",
+                            "dataType": {
+                                "type": 2,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 5,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT2"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 0s"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Display the longest ten films, show the title, release year, and length.\nSELECT title, release_year, length\nFROM film\nORDER BY length DESC\nLIMIT 10",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 12,
+                "end": 17,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "295cf1f4-bdc5-478c-e637-92ac5736aac6"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 157
+                        },
+                        "contentStart": 72,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "295cf1f4-bdc5-478c-e637-92ac5736aac6",
+                    "rows": [
+                        {
+                            "0": "SCALAWAG DUCK",
+                            "1": 2006,
+                            "2": 183
+                        },
+                        {
+                            "0": "YOUNG LANGUAGE",
+                            "1": 2006,
+                            "2": 183
+                        },
+                        {
+                            "0": "FRONTIER CABIN",
+                            "1": 2006,
+                            "2": 183
+                        },
+                        {
+                            "0": "MONSOON CAUSE",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "RECORDS ZORRO",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "REDS POCUS",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "SEARCHERS WAIT",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "SATURN NAME",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "BAKED CLEOPATRA",
+                            "1": 2006,
+                            "2": 182
+                        },
+                        {
+                            "0": "LOVE SUICIDES",
+                            "1": 2006,
+                            "2": 181
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "release_year",
+                            "field": "1",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "length",
+                            "field": "2",
+                            "dataType": {
+                                "type": 2,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 5,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT2"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 0s"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, release_year, length\nFROM film\nORDER BY length DESC\nLIMIT 10\nOFFSET 20",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 18,
+                "end": 21,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "0b15981d-d844-4443-cbdc-7b75e179a30c"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 101
+                        },
+                        "contentStart": 51,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "0b15981d-d844-4443-cbdc-7b75e179a30c",
+                    "rows": [
+                        {
+                            "0": "ACE GOLDFINGER",
+                            "1": 48
+                        },
+                        {
+                            "0": "ALIEN CENTER",
+                            "1": 46
+                        },
+                        {
+                            "0": "DIVORCE SHINING",
+                            "1": 47
+                        },
+                        {
+                            "0": "DOORS PRESIDENT",
+                            "1": 49
+                        },
+                        {
+                            "0": "DOWNHILL ENOUGH",
+                            "1": 47
+                        },
+                        {
+                            "0": "GROSSE WONDERFUL",
+                            "1": 49
+                        },
+                        {
+                            "0": "HALLOWEEN NUTS",
+                            "1": 47
+                        },
+                        {
+                            "0": "HANOVER GALAXY",
+                            "1": 47
+                        },
+                        {
+                            "0": "HAWK CHILL",
+                            "1": 47
+                        },
+                        {
+                            "0": "HEAVEN FREEDOM",
+                            "1": 48
+                        },
+                        {
+                            "0": "HEAVENLY GUN",
+                            "1": 49
+                        },
+                        {
+                            "0": "HOOK CHARIOTS",
+                            "1": 49
+                        },
+                        {
+                            "0": "HURRICANE AFFAIR",
+                            "1": 49
+                        },
+                        {
+                            "0": "IRON MOON",
+                            "1": 46
+                        },
+                        {
+                            "0": "KWAI HOMEWARD",
+                            "1": 46
+                        },
+                        {
+                            "0": "LABYRINTH LEAGUE",
+                            "1": 46
+                        },
+                        {
+                            "0": "MIDSUMMER GROUNDHOG",
+                            "1": 48
+                        },
+                        {
+                            "0": "NOTTING SPEAKEASY",
+                            "1": 48
+                        },
+                        {
+                            "0": "ODDS BOOGIE",
+                            "1": 48
+                        },
+                        {
+                            "0": "PARADISE SABRINA",
+                            "1": 48
+                        },
+                        {
+                            "0": "PELICAN COMFORTS",
+                            "1": 48
+                        },
+                        {
+                            "0": "RIDGEMONT SUBMARINE",
+                            "1": 46
+                        },
+                        {
+                            "0": "RUSH GOODFELLAS",
+                            "1": 48
+                        },
+                        {
+                            "0": "SHANGHAI TYCOON",
+                            "1": 47
+                        },
+                        {
+                            "0": "STEPMOM DREAM",
+                            "1": 48
+                        },
+                        {
+                            "0": "SUNSET RACER",
+                            "1": 48
+                        },
+                        {
+                            "0": "SUSPECTS QUILLS",
+                            "1": 47
+                        },
+                        {
+                            "0": "VALENTINE VANISHING",
+                            "1": 48
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "length",
+                            "field": "1",
+                            "dataType": {
+                                "type": 2,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 5,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT2"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 28 records retrieved in 0s"
+                    },
+                    "totalRowCount": 28,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, length\nFROM film\nWHERE length < 50",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 22,
+                "end": 25,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2b8de7a3-a1c3-47ca-f015-fb479e0cb40c"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 166
+                        },
+                        "contentStart": 74,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "2b8de7a3-a1c3-47ca-f015-fb479e0cb40c",
+                    "rows": [
+                        {
+                            "0": "BROOKLYN DESERT",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "CANYON STOCK",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "DINOSAUR SECRETARY",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "ESCAPE METROPOLIS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "FLIGHT LIES",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "FREAKY POCUS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "FUGITIVE MAGUIRE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "GHOSTBUSTERS ELF",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "GONE TROUBLE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "GREEDY ROOTS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "GRINCH MASSAGE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "HAMLET WISDOM",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "HARDLY ROBBERS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "HOME PITY",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "HOUSE DYNAMITE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "JET NEIGHBORS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "KILLER INNOCENT",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "LIGHTS DEER",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "LOCK REAR",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "MUSIC BOONDOCK",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "ROOF CHAMPION",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SATURN NAME",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SHEPHERD MIDSUMMER",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SIEGE MADRE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SILENCE KANE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SLACKER LIAISONS",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SMOOCHY CONTROL",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SOLDIERS EVOLUTION",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "SPIRIT FLINTSTONES",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "STORY SIDE",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "UNFAITHFUL KILL",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "WASH HEAVENLY",
+                            "1": "R",
+                            "2": 7
+                        },
+                        {
+                            "0": "WORKER TARZAN",
+                            "1": "R",
+                            "2": 7
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rating",
+                            "field": "1",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_duration",
+                            "field": "2",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 33 records retrieved in 0s"
+                    },
+                    "totalRowCount": 33,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, rating, rental_duration\nFROM film\nWHERE rating = 'R' AND rental_duration >= 7",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 26,
+                "end": 29,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "fad37a00-3517-4ef4-db92-6f7e0697c0f4"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 272
+                        },
+                        "contentStart": 99,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "fad37a00-3517-4ef4-db92-6f7e0697c0f4",
+                    "rows": [
+                        {
+                            "0": "ADAPTATION HOLES",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "AIRPORT POLLOCK",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "ALADDIN CALENDAR",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "24.99"
+                        },
+                        {
+                            "0": "ALIEN CENTER",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "ANTITRUST TOMATOES",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "APACHE DIVINE",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "APOCALYPSE FLAMINGOS",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "ARTIST COLDBLOODED",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "BABY HALL",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "23.99"
+                        },
+                        {
+                            "0": "BALLOON HOMEWARD",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "BIKINI BORROWERS",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "26.99"
+                        },
+                        {
+                            "0": "BOOGIE AMELIE",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "BOWFINGER GABLES",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "BROOKLYN DESERT",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "CANDIDATE PERDITION",
+                            "1": "R",
+                            "2": 4,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "CANDLES GRAPES",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "CHAMBER ITALIAN",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "CLONES PINOCCHIO",
+                            "1": "R",
+                            "2": 6,
+                            "3": "2.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "CLOSER BANG",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "CLUE GRAIL",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "27.99"
+                        },
+                        {
+                            "0": "COMA HEAD",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "COMMANDMENTS EXPRESS",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "CONEHEADS SMOOCHY",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "CONFIDENTIAL INTERVIEW",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "CONVERSATION DOWNHILL",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "CRANES RESERVOIR",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "CREEPERS KANE",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "23.99"
+                        },
+                        {
+                            "0": "DARKO DORADO",
+                            "1": "NC-17",
+                            "2": 3,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "DEER VIRGINIAN",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "DETAILS PACKER",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "17.99"
+                        },
+                        {
+                            "0": "DEVIL DESIRE",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "DOUBTFIRE LABYRINTH",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "DOZEN LION",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "DRAGONFLY STRANGERS",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "DRIVING POLISH",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "DROP WATERFRONT",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "DURHAM PANKY",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "EAGLES PANKY",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "EARLY HOME",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "27.99"
+                        },
+                        {
+                            "0": "EDGE KISSING",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "ELEMENT FREDDY",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "28.99"
+                        },
+                        {
+                            "0": "ELIZABETH SHANE",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "ENEMY ODDS",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "23.99"
+                        },
+                        {
+                            "0": "ENOUGH RAGING",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "FELLOWSHIP AUTUMN",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "FEVER EMPIRE",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "FIRE WOLVES",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "FLIGHT LIES",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "22.99"
+                        },
+                        {
+                            "0": "FORRESTER COMANCHEROS",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "22.99"
+                        },
+                        {
+                            "0": "FREAKY POCUS",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "FREDDY STORM",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "FRIDA SLIPPER",
+                            "1": "R",
+                            "2": 6,
+                            "3": "2.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "FUGITIVE MAGUIRE",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "28.99"
+                        },
+                        {
+                            "0": "GALAXY SWEETHEARTS",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "GIANT TROOPERS",
+                            "1": "R",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "GRINCH MASSAGE",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "25.99"
+                        },
+                        {
+                            "0": "GROSSE WONDERFUL",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "GUMP DATE",
+                            "1": "NC-17",
+                            "2": 3,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "HALL CASSIDY",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "HANOVER GALAXY",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "HARDLY ROBBERS",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "HAUNTED ANTITRUST",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "HEAVENLY GUN",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "HEDWIG ALTER",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "HOLLOW JEOPARDY",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "25.99"
+                        },
+                        {
+                            "0": "HOME PITY",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "HOUSE DYNAMITE",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "IGBY MAKER",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "IMPOSSIBLE PREJUDICE",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "INCH JET",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "INTERVIEW LIAISONS",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "17.99"
+                        },
+                        {
+                            "0": "JASON TRAP",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "JET NEIGHBORS",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "KILLER INNOCENT",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "KISSING DOLLS",
+                            "1": "R",
+                            "2": 3,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "LIES TREATMENT",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "28.99"
+                        },
+                        {
+                            "0": "LIFE TWISTED",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "2.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "LOCK REAR",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "MADIGAN DORADO",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "MASSACRE USUAL",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "MEMENTO ZOOLANDER",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "MERMAID INSECTS",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "MOD SECRETARY",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "MODEL FISH",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "NORTH TEQUILA",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "NUTS TIES",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "OPUS ICE",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "PANTHER REDS",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "22.99"
+                        },
+                        {
+                            "0": "PERDITION FARGO",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "27.99"
+                        },
+                        {
+                            "0": "PITY BOUND",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "PLUTO OLEANDER",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "PURPLE MOVIE",
+                            "1": "R",
+                            "2": 4,
+                            "3": "2.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "RACER EGG",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "RAGE GAMES",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "RAGING AIRPLANE",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "REQUIEM TYCOON",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "25.99"
+                        },
+                        {
+                            "0": "ROAD ROXANNE",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "RULES HUMAN",
+                            "1": "R",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "19.99"
+                        },
+                        {
+                            "0": "SATURN NAME",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "18.99"
+                        },
+                        {
+                            "0": "SCALAWAG DUCK",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "13.99"
+                        },
+                        {
+                            "0": "SEVEN SWARM",
+                            "1": "R",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "SHRUNK DIVINE",
+                            "1": "R",
+                            "2": 6,
+                            "3": "2.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "SLACKER LIAISONS",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "29.99"
+                        },
+                        {
+                            "0": "SOLDIERS EVOLUTION",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "27.99"
+                        },
+                        {
+                            "0": "SOMETHING DUCK",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "17.99"
+                        },
+                        {
+                            "0": "SPICE SORORITY",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "22.99"
+                        },
+                        {
+                            "0": "STEEL SANTA",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "15.99"
+                        },
+                        {
+                            "0": "STEPMOM DREAM",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "STING PERSONAL",
+                            "1": "NC-17",
+                            "2": 3,
+                            "3": "4.99",
+                            "4": "9.99"
+                        },
+                        {
+                            "0": "STREETCAR INTENTIONS",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "SUBMARINE BED",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "21.99"
+                        },
+                        {
+                            "0": "SUIT WALLS",
+                            "1": "R",
+                            "2": 3,
+                            "3": "4.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "TERMINATOR CLUB",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "UNFAITHFUL KILL",
+                            "1": "R",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "12.99"
+                        },
+                        {
+                            "0": "UNTOUCHABLES SUNRISE",
+                            "1": "NC-17",
+                            "2": 5,
+                            "3": "2.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "UPRISING UPTOWN",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "2.99",
+                            "4": "16.99"
+                        },
+                        {
+                            "0": "VAMPIRE WHALE",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "11.99"
+                        },
+                        {
+                            "0": "VANILLA DAY",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "20.99"
+                        },
+                        {
+                            "0": "VARSITY TRIP",
+                            "1": "NC-17",
+                            "2": 7,
+                            "3": "2.99",
+                            "4": "14.99"
+                        },
+                        {
+                            "0": "VIDEOTAPE ARSENIC",
+                            "1": "NC-17",
+                            "2": 4,
+                            "3": "4.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "WASH HEAVENLY",
+                            "1": "R",
+                            "2": 7,
+                            "3": "4.99",
+                            "4": "22.99"
+                        },
+                        {
+                            "0": "WITCHES PANIC",
+                            "1": "NC-17",
+                            "2": 6,
+                            "3": "4.99",
+                            "4": "10.99"
+                        },
+                        {
+                            "0": "YENTL IDAHO",
+                            "1": "R",
+                            "2": 5,
+                            "3": "4.99",
+                            "4": "11.99"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rating",
+                            "field": "1",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_duration",
+                            "field": "2",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_rate",
+                            "field": "3",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "replacement_cost",
+                            "field": "4",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 123 records retrieved in 0s"
+                    },
+                    "totalRowCount": 123,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, rating, rental_duration, rental_rate, replacement_cost\nFROM film\nWHERE (rating = 'R' OR rating = 'NC-17') AND replacement_cost < rental_rate * rental_duration",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 30,
+                "end": 33,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "85ce55c5-e7b9-4ca1-cd62-c8771da31063"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 97
+                        },
+                        "contentStart": 48,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "85ce55c5-e7b9-4ca1-cd62-c8771da31063",
+                    "rows": [
+                        {
+                            "0": "CAUSE DATE"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0s"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title\nFROM film\nWHERE title LIKE 'cause%'",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 34,
+                "end": 37,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "7f37a042-5936-45eb-ddc0-faf56bf544a7"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 95
+                        },
+                        "contentStart": 46,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "7f37a042-5936-45eb-ddc0-faf56bf544a7",
+                    "rows": [
+                        {
+                            "0": "ATLANTIS CAUSE"
+                        },
+                        {
+                            "0": "MONSOON CAUSE"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 0s"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title\nFROM film\nWHERE title LIKE '%cause'",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 38,
+                "end": 41,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "2b2bcb05-db73-4716-8e87-09e4410c0ab7"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 105
+                        },
+                        "contentStart": 55,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "2b2bcb05-db73-4716-8e87-09e4410c0ab7",
+                    "rows": [
+                        {
+                            "0": "ATLANTIS CAUSE"
+                        },
+                        {
+                            "0": "CAUSE DATE"
+                        },
+                        {
+                            "0": "MONSOON CAUSE"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 0s"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Display films that have CAUSE anywhere in the title\nSELECT title\nFROM film\nWHERE title like '%cause%'",
+                    "updatable": false,
+                    "fullTableName": "film"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 42,
+                "end": 44,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "e0b2dde3-0a1e-44e7-edef-e23bca8a9c46"
+                    ]
+                },
+                "currentHeight": 90.796875,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 111
+                        },
+                        "contentStart": 72,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "e0b2dde3-0a1e-44e7-edef-e23bca8a9c46",
+                    "rows": [
+                        {
+                            "0": 2006
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "release_year",
+                            "field": "0",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 5.108ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Display all release years present in the film table (no duplicates).\nSELECT DISTINCT release_year\nFROM film",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 45,
+                "end": 47,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "3a8ab322-4a83-42c3-df3b-19f4d3df059d"
+                    ]
+                },
+                "currentHeight": 305,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 109
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "3a8ab322-4a83-42c3-df3b-19f4d3df059d",
+                    "rows": [
+                        {
+                            "0": "ACADEMY DINOSAUR",
+                            "1": 6,
+                            "2": "0.99",
+                            "3": "5.94"
+                        },
+                        {
+                            "0": "ACE GOLDFINGER",
+                            "1": 3,
+                            "2": "4.99",
+                            "3": "14.97"
+                        },
+                        {
+                            "0": "ADAPTATION HOLES",
+                            "1": 7,
+                            "2": "2.99",
+                            "3": "20.93"
+                        },
+                        {
+                            "0": "AFFAIR PREJUDICE",
+                            "1": 5,
+                            "2": "2.99",
+                            "3": "14.95"
+                        },
+                        {
+                            "0": "AFRICAN EGG",
+                            "1": 6,
+                            "2": "2.99",
+                            "3": "17.94"
+                        },
+                        {
+                            "0": "AGENT TRUMAN",
+                            "1": 3,
+                            "2": "2.99",
+                            "3": "8.97"
+                        },
+                        {
+                            "0": "AIRPLANE SIERRA",
+                            "1": 6,
+                            "2": "4.99",
+                            "3": "29.94"
+                        },
+                        {
+                            "0": "AIRPORT POLLOCK",
+                            "1": 6,
+                            "2": "4.99",
+                            "3": "29.94"
+                        },
+                        {
+                            "0": "ALABAMA DEVIL",
+                            "1": 3,
+                            "2": "2.99",
+                            "3": "8.97"
+                        },
+                        {
+                            "0": "ALADDIN CALENDAR",
+                            "1": 6,
+                            "2": "4.99",
+                            "3": "29.94"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_duration",
+                            "field": "1",
+                            "dataType": {
+                                "type": 1,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 3,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "BOOL",
+                                    "BOOLEAN",
+                                    "INT1"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_rate",
+                            "field": "2",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rental_fee",
+                            "field": "3",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 3.63ms"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT title, rental_duration, rental_rate, rental_duration * rental_rate AS `rental_fee`\nFROM film\nLIMIT 10",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 48,
+                "end": 48,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "d8aed9a6-84be-47f3-ea05-96475226bade"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 36
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "d8aed9a6-84be-47f3-ea05-96475226bade",
+                    "rows": [
+                        {
+                            "0": 0.7071067811865476
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "random_math",
+                            "field": "0",
+                            "dataType": {
+                                "type": 9,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 53,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrZero",
+                                "synonyms": [
+                                    "FLOAT8"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0.105ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT SIN(PI()/4) AS `random_math`",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 49,
+                "end": 49,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "a198e990-6130-43ef-d7df-f2237f320c30"
+                    ]
+                },
+                "currentHeight": 36,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 46
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "a198e990-6130-43ef-d7df-f2237f320c30",
+                    "rows": [
+                        {
+                            "0": "happy"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "mask",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 0s"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT IF(500<1000, \"happy\", \"sad\") AS `mask`",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 50,
+                "end": 54,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "4af618eb-1960-464f-febc-4f8580640a4f"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 158
+                        },
+                        "contentStart": 89,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "4af618eb-1960-464f-febc-4f8580640a4f",
+                    "rows": [
+                        {
+                            "0": "ACADEMY DINOSAUR",
+                            "1": "PG"
+                        },
+                        {
+                            "0": "AGENT TRUMAN",
+                            "1": "PG"
+                        },
+                        {
+                            "0": "AIRPLANE SIERRA",
+                            "1": "PG-13"
+                        },
+                        {
+                            "0": "ALABAMA DEVIL",
+                            "1": "PG-13"
+                        },
+                        {
+                            "0": "ALASKA PHANTOM",
+                            "1": "PG"
+                        },
+                        {
+                            "0": "ALI FOREVER",
+                            "1": "PG"
+                        },
+                        {
+                            "0": "ALTER VICTORY",
+                            "1": "PG-13"
+                        },
+                        {
+                            "0": "AMADEUS HOLY",
+                            "1": "PG"
+                        },
+                        {
+                            "0": "ANTHEM LUKE",
+                            "1": "PG-13"
+                        },
+                        {
+                            "0": "APOLLO TEEN",
+                            "1": "PG-13"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "rating",
+                            "field": "1",
+                            "dataType": {
+                                "type": 43,
+                                "needsQuotes": true
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 0s"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Use functions to determine if a movie is PG rated or not  (do not use an OR criteria)\nSELECT title, rating\nFROM film\nWHERE LEFT(rating, 2) = \"PG\"\nLIMIT 10",
+                    "updatable": false
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 55,
+                "end": 58,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "6f30989c-f601-4a61-e03f-4f85e7b0f630"
+                    ]
+                },
+                "currentHeight": 305,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 264
+                        },
+                        "contentStart": 89,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "02806934-2911-47a3-dd22-92f746769e1d",
+                    "resultId": "6f30989c-f601-4a61-e03f-4f85e7b0f630",
+                    "rows": [
+                        {
+                            "0": "ACADEMY DINOSAUR",
+                            "1": 86,
+                            "2": 1,
+                            "3": 26,
+                            "4": "1 hrs. 26 min."
+                        },
+                        {
+                            "0": "ACE GOLDFINGER",
+                            "1": 48,
+                            "2": 0,
+                            "3": 48,
+                            "4": "0 hrs. 48 min."
+                        },
+                        {
+                            "0": "ADAPTATION HOLES",
+                            "1": 50,
+                            "2": 0,
+                            "3": 50,
+                            "4": "0 hrs. 50 min."
+                        },
+                        {
+                            "0": "AFFAIR PREJUDICE",
+                            "1": 117,
+                            "2": 1,
+                            "3": 57,
+                            "4": "1 hrs. 57 min."
+                        },
+                        {
+                            "0": "AFRICAN EGG",
+                            "1": 130,
+                            "2": 2,
+                            "3": 10,
+                            "4": "2 hrs. 10 min."
+                        },
+                        {
+                            "0": "AGENT TRUMAN",
+                            "1": 169,
+                            "2": 2,
+                            "3": 49,
+                            "4": "2 hrs. 49 min."
+                        },
+                        {
+                            "0": "AIRPLANE SIERRA",
+                            "1": 62,
+                            "2": 1,
+                            "3": 2,
+                            "4": "1 hrs. 2 min."
+                        },
+                        {
+                            "0": "AIRPORT POLLOCK",
+                            "1": 54,
+                            "2": 0,
+                            "3": 54,
+                            "4": "0 hrs. 54 min."
+                        },
+                        {
+                            "0": "ALABAMA DEVIL",
+                            "1": 114,
+                            "2": 1,
+                            "3": 54,
+                            "4": "1 hrs. 54 min."
+                        },
+                        {
+                            "0": "ALADDIN CALENDAR",
+                            "1": 63,
+                            "2": 1,
+                            "3": 3,
+                            "4": "1 hrs. 3 min."
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "title",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "length",
+                            "field": "1",
+                            "dataType": {
+                                "type": 2,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 5,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT2"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "hours",
+                            "field": "2",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "minutes",
+                            "field": "3",
+                            "dataType": {
+                                "type": 2,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 5,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INT2"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "time",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 1.711ms"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Convert the length (in minutes) to time in hours + minutes:  125 becomes 2 hr. 5 min.\nSELECT title, length, FLOOR(length / 60) AS `hours`, MOD(length, 60) AS `minutes`, CONCAT(FLOOR(length / 60), ' hrs. ', MOD(length, 60), ' min.') AS `time`\nFROM film\nLIMIT 10",
+                    "updatable": false,
+                    "fullTableName": ""
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 59,
+                "end": 59,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

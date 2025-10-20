@@ -1,0 +1,230 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "USE cartoon_equipment;\n-- customer id and order number for customers who do not have any orders\nSELECT Customer.customerId, orderNumber\nFROM Customer LEFT JOIN CustomerOrder\n    ON Customer.customerId = CustomerOrder.customerId\nWHERE orderNumber IS NULL;\n-- product id, name, and note text for products, include notes without a product anymore\nSELECT ProductNote.productId, productName, noteText\nFROM ProductNote LEFT JOIN Product\n    ON ProductNote.productId = Product.productId;\n-- vendor id of vendors who do not have *any* product notes\nSELECT vendorId\nFROM Vendor\nEXCEPT\nSELECT vendorId\nFROM Product INNER JOIN ProductNote\n    ON Product.productId = ProductNote.productId;\n\nSELECT Vendor.vendorId, COUNT(ProductNote.noteId)\nFROM Vendor \n    LEFT JOIN Product\n        ON Vendor.vendorId = Product.vendorId\n    LEFT JOIN ProductNote\n        ON Product.productId = ProductNote.productId\nGROUP BY vendorId\nHAVING COUNT(ProductNote.noteId) = 0;\n-- vendor id of vendors who have notes and orders\nSELECT vendorId\nFROM Product INNER JOIN ProductNote\n    ON Product.productId = ProductNote.productId\nINTERSECT\nSELECT vendorId\nFROM Product INNER JOIN OrderItem\n    ON Product.productId = OrderItem.productId;\n\nSELECT DISTINCT vendorId\nFROM Product \n    INNER JOIN ProductNote\n        ON Product.productId = ProductNote.productId\n    INNER JOIN OrderItem\n        ON Product.productId = OrderItem.productId;\n-- order number (no duplicates) of orders with a 4th order item and orders with a quantity 50 or more\nSELECT orderNumber -- count here is fine\nFROM orderItem\nWHERE orderItem = 4\nUNION\nSELECT orderNumber -- sum here is fine\nFROM orderItem\nWHERE quantity >= 50;\n\nSELECT DISTINCT orderNumber\nFROM orderItem\nWHERE orderItem >= 4 OR quantity >= 50;\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 54,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 54,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 12,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -2
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "962cb07d-ea7f-4ea1-ad08-7933bc2e79fd",
+                            "content": "OK, 0 records retrieved in 1.01ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 22
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 6,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 231
+                        },
+                        "contentStart": 73,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 7,
+                "end": 10,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 225
+                        },
+                        "contentStart": 89,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 11,
+                "end": 26,
+                "language": "mysql",
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 196
+                        },
+                        "contentStart": 60,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 196,
+                            "length": 267
+                        },
+                        "contentStart": 198,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 463,
+                            "length": 1
+                        },
+                        "contentStart": 462,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 27,
+                "end": 41,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 258
+                        },
+                        "contentStart": 50,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 258,
+                            "length": 197
+                        },
+                        "contentStart": 260,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 42,
+                "end": 53,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 259
+                        },
+                        "contentStart": 102,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 259,
+                            "length": 84
+                        },
+                        "contentStart": 261,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 54,
+                "end": 54,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
