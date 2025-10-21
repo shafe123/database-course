@@ -20,6 +20,7 @@ You will need the following tools to do the full course:
 Some optional tools that are useful:
 - VS Code
 - MySQL extension for VS Code
+- Draw.io
 
 Much of the examples are provided in the .mysql-notebook format.  This works well with the MySQL extension for VS Code.  
 Alternatively, you can use the extractor script in the root directory to convert the notebooks to raw .sql files.
